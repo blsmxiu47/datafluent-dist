@@ -1,336 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-	<!-- CSS -->
-	<link rel="stylesheet" href="../css/main.eb92775bd7dc8765c6a3.css">
-	<link rel="icon" type="image/png" href="../imgs/df-logo.png">
-	<title>Datafluent - Text Cleaning</title>
-</head>
-<body>
-	<header>
-		<nav class="navbar navbar-expand-lg">
-			<div class="logo-wrapper mr-1">
-				<a href="../index.html"><img src="../imgs/df-logo.png" alt="datafluent logo"></a>
-			</div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
-				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="../index.html"> Home</a>
-					</li>
-					<li id="nav-projects-span" class="nav-item">
-						<span>
-							Projects
-						</span>
-					</li>
-					<li class="nav-item nav-indent">
-						<a class="nav-link" href="../data-and-design.html">Beyond the Code</a>
-					</li>
-					<li class="nav-item nav-indent">
-						<a class="nav-link" href="../data-wrangling.html">State of the Art</a>
-					</li>
-					<li class="nav-item nav-indent">
-						<a class="nav-link" href="../nlp.html">Projects Portfolio</a>
-					<li class="nav-item">
-						<a class="nav-link" href="../about.html">About</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-	<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-			<li class="breadcrumb-item"><a href="../nlp.html">Projects Portfolio</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Text Cleaning - KDNuggets Articles</li>
-		</ol>
-	</nav>
-	<nav role="navigation" class="project-navbar" id="projectNavbar">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textcleaning-navbar"
-			aria-controls="textcleaning-navbar" aria-expanded="false" aria-label="Toggle project navigation">
-			<span><i class="fas fa-caret-down"></i></span>
-		</button>
-		<div class="collapse navbar-collapse" id="textcleaning-navbar">
-			<ul class="navbar-nav">
-				<li class="projnav-item">
-					<a class="projnav-link" href="#theData">The Data</a>
-				</li>
-				<li class="projnav-item">
-					<a class="projnav-link" href="#edaExamples">EDA Examples</a>
-				</li>
-				<li class="projnav-item">
-					<a class="projnav-link" href="#textPrep">Text Prep for NLU</a>
-				</li>
-				<li class="projnav-item">
-					<a class="projnav-link" href="#gensimPrep">Gensim Doc &amp; Token Prep</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
-    <section class="container article-top">
-        <div class="main-heading">
-            <h1>
-                Text Cleaning - KDNuggets Articles
-            </h1>
-		</div>
-		<img class="img-block" style="width: 250px;" src="../imgs/nltksoap1.png" alt="soap and suds"/>
-    </section>
-	<section class="container">
-        <div class="row">
-			<div class="row-content">
-				<p>
-					So here's a bit of what we'll be getting into below:
-				</p>
-				<p>
-					<ol class="list-lg mb-2x">
-						<li>NLTK, re (regex), and custom functions for text cleaning</li>
-						<li>Some text data EDA, including article tag and word counts, plus token Tf-idf calculations</li>
-						<li>A couple viable options for lemmatization: TextBlob and Stanford CoreNLP</li>
-						<li>A taste of Gensim Phraser and n-grams to prepare tokens for topic modeling</li>
-					</ol>
-				</p>
-				<p>
-					This is technically a continuation of the <a href="../data-wrangling/text-scraping.html" target="_blank">KDNuggets Text Scraping</a> 
-					module from my <i>Data Wrangling</i> projects, but it's not necessary to read the web scraping part in order to understand this one. 
-					Just trust that we've gotten the following data from <a href="https://www.kdnuggets.com/" target="_blank">kdnuggets.com</a> and 
-					understand that the article body 'post_text' is still messy.
-				</p>
-				<p class="blog-disclaimer">
-					Please note that these pages act as decorative <i>summaries</i> for some of my portfolio work. If the summaries here pique your interest then check out the
-					 full notebooks and code to be found on <a class="bloginline-link" href="https://github.com/blsmxiu47" target="_blank">my GitHub</a>. There may be quite a bit more code,
-					  but most of my notebooks are well-annotated with my thoughts and explanations.
-				</p>
-			</div>
-		</div>
-	</section>
-
-
-
-	<section class="project-content container">
-		<article>
-            <h2 id="theData">The Data</h2>
-            <p>
-				Again, this data comes from right where we left off in the web scraping module, <a href="../data-wrangling/text-scraping.html" target="_blank">KDNuggets Text Scraping</a>. 
-				We have columns for article title, publish date, author and tags (when applicable), the excerpt or summary that comes at the beginning of most articles, url, and of course 
-				the body of the article, post_text.
-			</p>
-			<p>
-				While it's certainly interesting and maybe useful to look at title, author, etc., for this and the following module we won't care about any of that. We're going to be dealing 
-				with only the cleaning up of `post_text`, and some modifications to article `tags` today. This is in preparation for topic modeling based purely on post_text, and also maybe some 
-				supervised prediction of tags based on article text.
-			</p>
-
-			<pre>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous"><!-- CSS --><link rel="stylesheet" href="../css/main.eb92775bd7dc8765c6a3.css"><link rel="icon" type="image/png" href="../imgs/df-logo.png"><title>Datafluent - Text Cleaning</title></head><body><header><nav class="navbar navbar-expand-lg"><div class="logo-wrapper mr-1"><a href="../index.html"><img src="../imgs/df-logo.png" alt="datafluent logo"></a></div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li><li id="nav-projects-span" class="nav-item"><span>Projects</span></li><li class="nav-item nav-indent"><a class="nav-link" href="../data-and-design.html">Beyond the Code</a></li><li class="nav-item nav-indent"><a class="nav-link" href="../data-wrangling.html">State of the Art</a></li><li class="nav-item nav-indent"><a class="nav-link" href="../nlp.html">Projects Portfolio</a></li><li class="nav-item"><a class="nav-link" href="../about.html">About</a></li></ul></div></nav></header><nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Home</a></li><li class="breadcrumb-item"><a href="../nlp.html">Projects Portfolio</a></li><li class="breadcrumb-item active" aria-current="page">Text Cleaning - KDNuggets Articles</li></ol></nav><nav role="navigation" class="project-navbar" id="projectNavbar"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textcleaning-navbar" aria-controls="textcleaning-navbar" aria-expanded="false" aria-label="Toggle project navigation"><span><i class="fas fa-caret-down"></i></span></button><div class="collapse navbar-collapse" id="textcleaning-navbar"><ul class="navbar-nav"><li class="projnav-item"><a class="projnav-link" href="#theData">The Data</a></li><li class="projnav-item"><a class="projnav-link" href="#edaExamples">EDA Examples</a></li><li class="projnav-item"><a class="projnav-link" href="#textPrep">Text Prep for NLU</a></li><li class="projnav-item"><a class="projnav-link" href="#gensimPrep">Gensim Doc &amp; Token Prep</a></li></ul></div></nav><section class="container article-top"><div class="main-heading"><h1>Text Cleaning - KDNuggets Articles</h1></div><img class="img-block" style="width: 250px;" src="../imgs/nltksoap1.png" alt="soap and suds"></section><section class="container"><div class="row"><div class="row-content"><p>So here's a bit of what we'll be getting into below:</p><p></p><ol class="list-lg mb-2x"><li>NLTK, re (regex), and custom functions for text cleaning</li><li>Some text data EDA, including article tag and word counts, plus token Tf-idf calculations</li><li>A couple viable options for lemmatization: TextBlob and Stanford CoreNLP</li><li>A taste of Gensim Phraser and n-grams to prepare tokens for topic modeling</li></ol><p></p><p>This is technically a continuation of the <a href="../data-wrangling/text-scraping.html" target="_blank">KDNuggets Text Scraping</a> module from my <i>Data Wrangling</i> projects, but it's not necessary to read the web scraping part in order to understand this one. Just trust that we've gotten the following data from <a href="https://www.kdnuggets.com/" target="_blank">kdnuggets.com</a> and understand that the article body 'post_text' is still messy.</p><p class="blog-disclaimer">Please note that these pages act as decorative <i>summaries</i> for some of my portfolio work. If the summaries here pique your interest then check out the full notebooks and code to be found on <a class="bloginline-link" href="https://github.com/blsmxiu47" target="_blank">my GitHub</a>. There may be quite a bit more code, but most of my notebooks are well-annotated with my thoughts and explanations.</p></div></div></section><section class="project-content container"><article><h2 id="theData">The Data</h2><p>Again, this data comes from right where we left off in the web scraping module, <a href="../data-wrangling/text-scraping.html" target="_blank">KDNuggets Text Scraping</a>. We have columns for article title, publish date, author and tags (when applicable), the excerpt or summary that comes at the beginning of most articles, url, and of course the body of the article, post_text.</p><p>While it's certainly interesting and maybe useful to look at title, author, etc., for this and the following module we won't care about any of that. We're going to be dealing with only the cleaning up of `post_text`, and some modifications to article `tags` today. This is in preparation for topic modeling based purely on post_text, and also maybe some supervised prediction of tags based on article text.</p><pre>
 <code class="language-python">import numpy as np
 import pandas as pd
 from IPython.display import display, Math, Latex</code>
-			</pre>
-			<pre>
+			</pre><pre>
 <code class="language-python">articles.head()</code>
-			</pre>
-			<figure class="out-fitall">
-				<img src="../imgs/articles_head.png" alt="articles df head"/>
-			</figure>
-			<figure class="out-fitall">
-				<img src="../imgs/articles_tail.png" alt="articles df tail"/>
-			</figure>
-			<div class="text-block mb-2x">
-				<p>
-					So we clearly have several interesting columns that we've collected, but today we're going to focus on the 'post_text' and 'tags' variables. 
-				</p>
-			</div>
-			<p>
-				Ultimately we plan on doing some topic modeling and using this dataset to look at how an automated topic-tagging strategy might compare to tags actually 
-				used on articles. We know the results are not going to be similar; tags used on KDN articles are many and very specific to the content, and frankly tags and topics 
-				are not the same thing, nor should they be. However I'm curious to see what level of replicability we can reach by tweaking a topic model. E.g. if we increase the number 
-				of topics (with a relatively small dataset like this) can we get more specific topics or will we just start to see essentially repeated topics after a certain threshold.
-			</p>
-			<p>
-				My guess is the latter, but we'll see why and explain more in that module. This module today is a chance to look at the cleaning and a bit of preparing text for NLP that 
-				comes before feeding text data into a character or token-based model.
-			</p>
-			<p>
-				We also briefly prepare the 'tags' column since I want to try predicting tags with supervised learning as well. This part is somewhat unrelated to the main text 
-				cleaning so it'll be on github if it's not included below (for the sake of brevity).
-			</p>
-
-			<pre>
+			</pre><figure class="out-fitall"><img src="../imgs/articles_head.png" alt="articles df head"></figure><figure class="out-fitall"><img src="../imgs/articles_tail.png" alt="articles df tail"></figure><div class="text-block mb-2x"><p>So we clearly have several interesting columns that we've collected, but today we're going to focus on the 'post_text' and 'tags' variables.</p></div><p>Ultimately we plan on doing some topic modeling and using this dataset to look at how an automated topic-tagging strategy might compare to tags actually used on articles. We know the results are not going to be similar; tags used on KDN articles are many and very specific to the content, and frankly tags and topics are not the same thing, nor should they be. However I'm curious to see what level of replicability we can reach by tweaking a topic model. E.g. if we increase the number of topics (with a relatively small dataset like this) can we get more specific topics or will we just start to see essentially repeated topics after a certain threshold.</p><p>My guess is the latter, but we'll see why and explain more in that module. This module today is a chance to look at the cleaning and a bit of preparing text for NLP that comes before feeding text data into a character or token-based model.</p><p>We also briefly prepare the 'tags' column since I want to try predicting tags with supervised learning as well. This part is somewhat unrelated to the main text cleaning so it'll be on github if it's not included below (for the sake of brevity).</p><pre>
 <code class="language-python">articles.describe()</code>
-			</pre>
-			<figure class="out-wide">
-				<img src="../imgs/articles_describe.png" alt="articles_describe output"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					<ul>
-						<li>
-							Note that there are duplicates of the excerpts and more significantly post_text. These are probably some regularly posted types like job openings. 
-							We did ensure not to include duplicates of title when we scraped the data.
-						</li>
-						<li>
-							There aren't so many unique authors but that's because over half of the articles didn't have a clear author or else it was not scraped correctly. 
-							Also a lot of the earlier articles were penned by the same person. It really doesn't matter seeing as I don't especially care about the author for this module.
-						</li>
-						<li>
-							urls are all unique, that's a good sanity check
-						</li>
-						<li>
-							Most of the tag combinations form a unique set, which means we'll probably be dropping and merging a great many tags (e.g. 'ML' and 'Machine Learning').
-						</li>
-					</ul>
-				</p>
-			</div>
-			<h2 id="edaExamples">EDA Examples</h2>
-			<h3>Article Excerpt &amp; Post Text</h3>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/articles_describe.png" alt="articles_describe output"></figure><div class="text-block"><p></p><ul><li>Note that there are duplicates of the excerpts and more significantly post_text. These are probably some regularly posted types like job openings. We did ensure not to include duplicates of title when we scraped the data.</li><li>There aren't so many unique authors but that's because over half of the articles didn't have a clear author or else it was not scraped correctly. Also a lot of the earlier articles were penned by the same person. It really doesn't matter seeing as I don't especially care about the author for this module.</li><li>urls are all unique, that's a good sanity check</li><li>Most of the tag combinations form a unique set, which means we'll probably be dropping and merging a great many tags (e.g. 'ML' and 'Machine Learning').</li></ul><p></p></div><h2 id="edaExamples">EDA Examples</h2><h3>Article Excerpt &amp; Post Text</h3><pre>
 <code class="language-python">print('Mean length of excerpt:\n', int(np.round(articles['excerpt'].apply(lambda x: len(x)).mean())), 'characters.')</code>
-			</pre>
-			<figure class="out-fitall">
-				<img src="../imgs/mean_length_excpt.png" alt="mean length of excerpts"/>
-			</figure>
-			<pre>
+			</pre><figure class="out-fitall"><img src="../imgs/mean_length_excpt.png" alt="mean length of excerpts"></figure><pre>
 <code class="language-python">print('Mean length of post_text:\n', int(np.round(articles['post_text'].apply(lambda x: len(x)).mean())), 'characters.')</code>
-			</pre>
-			<figure class="out-wide">
-				<img src="../imgs/mean_length_posttxt.png" alt="mean length of post_text"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					4883 actually already seems like a pretty reasonable length for an online article, but this value will decrease quite a bit after we remove js bits, 
-					newline characters, stopwords, etc. If you go look at a recent KDN article today I bet you're likely to find they're longer than the average we end up getting here. 
-					In addition to our removing of stopwords, etc., this is because recent articles are on average longer than past articles for KDNuggets (recently more contributors,
-					 more content, more to report on, larger user base, etc., I suppose).
-				</p>
-			</div>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/mean_length_posttxt.png" alt="mean length of post_text"></figure><div class="text-block"><p>4883 actually already seems like a pretty reasonable length for an online article, but this value will decrease quite a bit after we remove js bits, newline characters, stopwords, etc. If you go look at a recent KDN article today I bet you're likely to find they're longer than the average we end up getting here. In addition to our removing of stopwords, etc., this is because recent articles are on average longer than past articles for KDNuggets (recently more contributors, more content, more to report on, larger user base, etc., I suppose).</p></div><pre>
 <code class="language-python">text_series = articles['post_text']
 text_series[1]</code>
-			</pre>
-			<figure class="out-text">
-				<img src="../imgs/text_series1.png" alt="article text example"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					This is a relatively clean example it turns out, but you will notice we at least need to remove things like newline characters before using these post texts.
-				</p>
-			</div>
-
-
-			<h3>Most Common Tags</h3>
-			<p>
-				The following section is an example of some EDA we can do for article tags. We'll start by just getting an idea of what the tagging scheme is for this website. 
-				We want to know whether they use a few general tags that make post relationships clear and inter-article navigation easier, or whether tags are used in abundance and 
-				indicate very specifically what the post is about (or whether it's a mix of these).
-			</p>
-			<p>
-				When we ultimately build a model we want to limit the quantity of tags we consider if possible. Many many tags that just appear once or twice won't be helpful and 
-				will amount to noise in the end, so if there are tons of tags for every article we'll need to come up with our own strategy for condensing them.
-			</p>
-			<pre>
+			</pre><figure class="out-text"><img src="../imgs/text_series1.png" alt="article text example"></figure><div class="text-block"><p>This is a relatively clean example it turns out, but you will notice we at least need to remove things like newline characters before using these post texts.</p></div><h3>Most Common Tags</h3><p>The following section is an example of some EDA we can do for article tags. We'll start by just getting an idea of what the tagging scheme is for this website. We want to know whether they use a few general tags that make post relationships clear and inter-article navigation easier, or whether tags are used in abundance and indicate very specifically what the post is about (or whether it's a mix of these).</p><p>When we ultimately build a model we want to limit the quantity of tags we consider if possible. Many many tags that just appear once or twice won't be helpful and will amount to noise in the end, so if there are tons of tags for every article we'll need to come up with our own strategy for condensing them.</p><pre>
 <code class="language-python"># Let's explore the tags real quick
 tags = articles['tags']
 set(tags)</code>
-			</pre>
-			<figure class="out-fitall">
-				<img src="../imgs/tags_set_top.png" alt="unique tag combinations top"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					Just looking at the top of the tags, I'm gonna guess that we're dealing with a few categories of tags:
-					<ol class="bloglist">
-						<li>
-							several very common tags like 'AI', 'Machine Learning', 'Data Science', 'Pandas', 'R', ...
-						</li>
-						<li>
-							some tags that come up less frequently but that may be common enough to be useful and indicate content such as 'Privacy', 'Self-Driving Car', 'LSTM', 'NIH'
-						</li>
-						<li>
-							a third group of tags that may helpful for content but occur infrequently in the scope of the whole dataset, like the names of startups and 
-							not-so-well-known technologies
-						</li>
-						<li>
-							tags that are not really of interest to us wrt what we want to train on, like the word 'Trends' or 'Faculty' or an author's name that 
-							occurs only once as a tag for some reason.
-						</li>
-					</ol>
-					There are also lots of tags that are more or less duplicates of each other, like ML and 'Machine Learning', as noted above, 
-					that we'll end up combining as we ultimately try to decrease the number of unique tags we have to learn.
-				</p>
-				<p>
-					Keep in mind that that there are only tags starting in 2014.
-				</p>
-			</div>
-
-			<div class="text-block">
-				<p>
-					Below, transforming our tags series into a list of lists of strings (one list for each article):
-				</p>
-			</div>
-			<pre>
+			</pre><figure class="out-fitall"><img src="../imgs/tags_set_top.png" alt="unique tag combinations top"></figure><div class="text-block"><p>Just looking at the top of the tags, I'm gonna guess that we're dealing with a few categories of tags:</p><ol class="bloglist"><li>several very common tags like 'AI', 'Machine Learning', 'Data Science', 'Pandas', 'R', ...</li><li>some tags that come up less frequently but that may be common enough to be useful and indicate content such as 'Privacy', 'Self-Driving Car', 'LSTM', 'NIH'</li><li>a third group of tags that may helpful for content but occur infrequently in the scope of the whole dataset, like the names of startups and not-so-well-known technologies</li><li>tags that are not really of interest to us wrt what we want to train on, like the word 'Trends' or 'Faculty' or an author's name that occurs only once as a tag for some reason.</li></ol>There are also lots of tags that are more or less duplicates of each other, like ML and 'Machine Learning', as noted above, that we'll end up combining as we ultimately try to decrease the number of unique tags we have to learn.<p></p><p>Keep in mind that that there are only tags starting in 2014.</p></div><div class="text-block"><p>Below, transforming our tags series into a list of lists of strings (one list for each article):</p></div><pre>
 <code class="language-python">tags = [str(i) for i in tags]
 print(tags[2000])
 tags_split = [t.split(sep=', ') for t in tags]
 print(tags_split[2000])</code>
-			</pre>
-			<figure class="out-wide">
-				<img src="../imgs/tags_split_2000.png" alt="2001st entry of tags_split"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					Then we'll flatten into one list of tags so that we can build a quick frequency list (with Counter).
-				</p>
-			</div>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/tags_split_2000.png" alt="2001st entry of tags_split"></figure><div class="text-block"><p>Then we'll flatten into one list of tags so that we can build a quick frequency list (with Counter).</p></div><pre>
 <code class="language-python"># Flatten tag lists into one long list of individual tags 
 tags_flattened = [t for t_list in tags_split for t in t_list]
 tags_flattened[2000:2010]</code>
-			</pre>
-			<figure class="out-tall">
-				<img src="../imgs/tags_flattened_slice.png" alt="slice of tags_flattened"/>
-			</figure>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/tags_flattened_slice.png" alt="slice of tags_flattened"></figure><pre>
 <code class="language-python">from collections import Counter
 
 tags_counts = Counter(tags_flattened)
 most_common_tags = sorted(tags_counts.items(), key=lambda x: x[1], reverse=True)[:10]
 
 print(most_common_tags)</code>
-			</pre>
-			<figure class="out-wide">
-				<img src="../imgs/print_commontags.png" alt="top 10 frequent tags"/>
-			</figure>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/print_commontags.png" alt="top 10 frequent tags"></figure><pre>
 <code class="language-python">tag_counts = sorted(tags_counts.items(), key=lambda x: x[1], reverse=True)
 common_tags_df = pd.DataFrame(tag_counts, columns=['Tag', 'Count'])
 common_tags_df.head()</code>
-			</pre>
-			<figure class="out-tall">
-				<img src="../imgs/commontags_dfhead.png" alt="df version of common tags head"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					So we may have way too many tags in general, but it's reassuring to see that we do have several tags that could be used to determine overarching topics across 
-					many articles. I'm excited to compared these tags to parameters we get from our future topic models based on post_text.
-				</p>
-				<p>
-					Below, a sample of the least common tags:
-				</p>
-			</div>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/commontags_dfhead.png" alt="df version of common tags head"></figure><div class="text-block"><p>So we may have way too many tags in general, but it's reassuring to see that we do have several tags that could be used to determine overarching topics across many articles. I'm excited to compared these tags to parameters we get from our future topic models based on post_text.</p><p>Below, a sample of the least common tags:</p></div><pre>
 <code class="language-python">tags_df = pd.DataFrame(tag_counts, columns=['Tag', 'Count'])
 tags_df.tail(10)</code>
-			</pre>
-			<figure class="out-tall">
-				<img src="../imgs/tagsdf_tail.png" alt="tail of tags df"/>
-			</figure>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/tagsdf_tail.png" alt="tail of tags df"></figure><pre>
 <code class="language-python">import matplotlib.pyplot as plt
 import seaborn as sns
 %matplotlib inline
@@ -345,48 +55,7 @@ _ = plt.ylabel('Count')
 _ = plt.xticks(rotation=45, ha='right', fontsize=11)
 _ = plt.title('Top '+str(n_top)+' Most Common Tags')
 plt.show()</code>
-			</pre>
-			<figure class="out-fitall">
-				<img src="../imgs/commontags_plot.png" alt="countplot of most frequent tags"/>
-			</figure>
-			<p>
-				Most of these tags are exactly what you'd expect from a data science news source, right? Now the question for us is, when we create our topic model(s), will 
-				we see most if not all of the same words and phrases appear? Remember when we create our model it will be entirely based on 'post_text' alone, i.e. it will never 
-				see this 'tags' series.
-			</p>
-
-
-			<h2 id="textPrep">Text Preparation for NLU</h2>
-			<h3>Text Cleaning</h3>
-			<p>
-				We'll now clean up our text. For these article bodies from raw html it involves a few important steps:
-				<ol>
-					<li>
-						Removing the line breaks denoted by \r and \n
-					</li>
-					<li>
-						Removing symbols like brackets, commas, colons, '@', for instance we get a lot of twitter ids within this text.
-					</li>
-					<li>
-						Removing urls
-					</li>
-					<li>
-						Removing inline Javascript that occurs in some of the articles
-					</li>
-					<li>
-						Removing English stopwords
-					</li>
-					<li>
-						Setting all to lowercase*
-					</li>
-					<li>
-						Removing extra whitespace, whether originially in the text or introduced by our cleaning process
-					</li>
-				</ol>
-				*May or may not modify this to retain uniqueness of certain named entities. e.g. the word 'data' vs. a company called 'Data, Inc.'. 
-				I think it's fine to lowercase everything because these sorts of named entities will mostly be picked up in our bi and trigrams if they really are common enough to matter.
-			</p>
-			<pre>
+			</pre><figure class="out-fitall"><img src="../imgs/commontags_plot.png" alt="countplot of most frequent tags"></figure><p>Most of these tags are exactly what you'd expect from a data science news source, right? Now the question for us is, when we create our topic model(s), will we see most if not all of the same words and phrases appear? Remember when we create our model it will be entirely based on 'post_text' alone, i.e. it will never see this 'tags' series.</p><h2 id="textPrep">Text Preparation for NLU</h2><h3>Text Cleaning</h3><p>We'll now clean up our text. For these article bodies from raw html it involves a few important steps:</p><ol><li>Removing the line breaks denoted by \r and \n</li><li>Removing symbols like brackets, commas, colons, '@', for instance we get a lot of twitter ids within this text.</li><li>Removing urls</li><li>Removing inline Javascript that occurs in some of the articles</li><li>Removing English stopwords</li><li>Setting all to lowercase*</li><li>Removing extra whitespace, whether originially in the text or introduced by our cleaning process</li></ol>*May or may not modify this to retain uniqueness of certain named entities. e.g. the word 'data' vs. a company called 'Data, Inc.'. I think it's fine to lowercase everything because these sorts of named entities will mostly be picked up in our bi and trigrams if they really are common enough to matter.<p></p><pre>
 <code class="language-python">import re
 import nltk
 nltk.download('stopwords')
@@ -427,63 +96,20 @@ def text_prepare(text):
 		
 
 	return text</code>
-			</pre>
-			<div class="text-block">
-				<p>
-					Note - you'll find <i>clean_text</i> or whatever functions like this in pretty much any text cleaning tutorial you look at online. This is probably an amalgam of 
-					a few different approaches I've seen over the years, but just saying it's not original except for the part handling kdn's js.
-				</p>
-			</div>
-			<pre>
+			</pre><div class="text-block"><p>Note - you'll find <i>clean_text</i> or whatever functions like this in pretty much any text cleaning tutorial you look at online. This is probably an amalgam of a few different approaches I've seen over the years, but just saying it's not original except for the part handling kdn's js.</p></div><pre>
 <code class="language-python"># there was like one article that ended up not containing any text that would be semantically useful for us, so
 articles = articles.loc[articles['post_text'] != '']</code>
-			</pre>
-			<p>
-				Before cleaning:
-			</p>
-			<pre>
+			</pre><p>Before cleaning:</p><pre>
 <code class="language-python">text_series[0]</code>
-			</pre>
-			<figure class="out-text">
-				<img src="../imgs/before_clean0.png" alt="article text pre-cleaning"/>
-			</figure>
-			<p>
-				After cleaning:
-			</p>
-			<pre>
+			</pre><figure class="out-text"><img src="../imgs/before_clean0.png" alt="article text pre-cleaning"></figure><p>After cleaning:</p><pre>
 <code class="language-python">clean_text = [text_prepare(x) for x in text_series]
 print(clean_text[0])</code>
-			</pre>
-			<figure class="out-text">
-				<img src="../imgs/afterc_clean0.png" alt="article text post-cleaning"/>
-			</figure>
-
-			<p>
-				Another after example with fewer numbers:
-			</p>
-			<pre>
+			</pre><figure class="out-text"><img src="../imgs/afterc_clean0.png" alt="article text post-cleaning"></figure><p>Another after example with fewer numbers:</p><pre>
 <code class="language-python">print(clean_text[11])</code>
-			</pre>
-			<figure class="out-text">
-				<img src="../imgs/after_clean1.png" alt="different article text post-clean"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					I'd certainly consider whether to remove numbers, or at least numbers with more than 2 digits, like phone numbers and addresses,
-					 but keep in mind we're eventually going to be dropping certain unhelpful tokens anyway, most likely if they have a low tf-idf score or only occur like once 
-					 in the dataset.
-				</p>
-			</div>
-			<h3>Lemmatization (with POS tagging)</h3>
-			<p>
-				Though I don't want this module to go too long, I did a comparison of a few methods of lemmatization with this text data, and we'll look at some results using 
-				just two packages below: TextBlob and Stanford CoreNLP.
-			</p>
-			<pre>
+			</pre><figure class="out-text"><img src="../imgs/after_clean1.png" alt="different article text post-clean"></figure><div class="text-block"><p>I'd certainly consider whether to remove numbers, or at least numbers with more than 2 digits, like phone numbers and addresses, but keep in mind we're eventually going to be dropping certain unhelpful tokens anyway, most likely if they have a low tf-idf score or only occur like once in the dataset.</p></div><h3>Lemmatization (with POS tagging)</h3><p>Though I don't want this module to go too long, I did a comparison of a few methods of lemmatization with this text data, and we'll look at some results using just two packages below: TextBlob and Stanford CoreNLP.</p><pre>
 <code class="language-python"># We'll do the final with Stanford CoreNLP if we notice improved quality, otherwise TextBlob is fine
 from textblob import TextBlob, Word</code>
-			</pre>
-			<pre>
+			</pre><pre>
 <code class="language-python"># TextBlob implementation
 def lemmatize_textblob(sentence):
 	sent = TextBlob(sentence)
@@ -494,31 +120,14 @@ def lemmatize_textblob(sentence):
 	words_and_tags = [(w, tag_dict.get(pos[0], 'n')) for w, pos in sent.tags]
 	lemmatized_list = [wd.lemmatize(tag) for wd, tag in words_and_tags]
 	return " ".join(lemmatized_list)</code>
-			</pre>
-			<pre>
+			</pre><pre>
 <code class="language-python">sentence = "This is an excruciatingly confusing example sentence where the therapized coffee's mugs went to school"
 lemmatize_textblob(sentence)
 </code>
-			</pre>
-			<figure class="out-text">
-				<img src="../imgs/testlemm_textblob.png" alt="lemmatized sent with textblob"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					Notice simple lemmatizations are performed, but TextBlob ignores many complicated forms for English.
-				</p>
-				<p>
-					So we get "is" -> "be" , "coffee's" -> "coffee" + "'s", "mugs" -> "mug", "went" -> "go", but we miss the lemming of "an", "therapized" in this example.
-				</p>
-			</div>
-			<pre>
+			</pre><figure class="out-text"><img src="../imgs/testlemm_textblob.png" alt="lemmatized sent with textblob"></figure><div class="text-block"><p>Notice simple lemmatizations are performed, but TextBlob ignores many complicated forms for English.</p><p>So we get "is" -> "be" , "coffee's" -> "coffee" + "'s", "mugs" -> "mug", "went" -> "go", but we miss the lemming of "an", "therapized" in this example.</p></div><pre>
 <code class="language-python"># try with one post text example
 lemmatize_textblob(clean_text[0])</code>
-			</pre>
-			<figure class="out-text">
-				<img src="../imgs/lemm_textblob1.png" alt="lemmatized article with textblob"/>
-			</figure>
-			<pre>
+			</pre><figure class="out-text"><img src="../imgs/lemm_textblob1.png" alt="lemmatized article with textblob"></figure><pre>
 <code class="language-python"># Stanford CoreNLP implementation
 # Note: You'll need to start the server as well. See docs: https://stanfordnlp.github.io/CoreNLP/
 
@@ -550,67 +159,23 @@ def lemmatize_corenlp(conn_nlp, sentence):
 # make the connection and call lemmatize_corenlp
 nlp = StanfordCoreNLP('http://localhost', port=9000, timeout=30000)
 lemmatize_corenlp(conn_nlp=nlp, sentence=sentence)</code>
-			</pre>
-			<figure class="out-text">
-				<img src="../imgs/testlemm_corenlp.png" alt="lemmatized sent with corenlp"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					We get a bit more out of CoreNLP for this sentence, although it won't always be so.
-				</p>
-			</div>
-			<pre>
+			</pre><figure class="out-text"><img src="../imgs/testlemm_corenlp.png" alt="lemmatized sent with corenlp"></figure><div class="text-block"><p>We get a bit more out of CoreNLP for this sentence, although it won't always be so.</p></div><pre>
 <code class="language-python">lemmatize_corenlp(nlp, clean_text[0])</code>
-			</pre>
-			<figure class="out-text">
-				<img src="../imgs/lemm_corenlp1.png" alt="lemmatized article with corenlp"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					This is just showing one example from the dataset but generally I prefer CoreNLP to other packages for lemmatization and certain other techniques like NER. 
-					TextBlob is what I like to use when I am just testing something real quick or I'm lazy and don't feel like starting up the CoreNLP server, 
-					because textblob is also a good package.
-				</p>
-			</div>
-			<p>
-				The truth is you're never going to be perfect with stemming or lemmatization, because natural language 
-				is just so diverse and complex and there are so many exceptions to the rules. You can hardcode a certain number of common exceptions but it's 
-				not worth the trouble or bytes required. Plus even if you spend that much time on English, it's a similar investment to do the same for other 
-				languages if you need (although not all languages are as unneccessarily complex as English..). 
-			</p>
-			<p>
-				Anyway the existing packages and methods are never perfect but work fairly well in practice, though each may have pros/cons depending on the situation.
-			</p>
-
-			<pre>
+			</pre><figure class="out-text"><img src="../imgs/lemm_corenlp1.png" alt="lemmatized article with corenlp"></figure><div class="text-block"><p>This is just showing one example from the dataset but generally I prefer CoreNLP to other packages for lemmatization and certain other techniques like NER. TextBlob is what I like to use when I am just testing something real quick or I'm lazy and don't feel like starting up the CoreNLP server, because textblob is also a good package.</p></div><p>The truth is you're never going to be perfect with stemming or lemmatization, because natural language is just so diverse and complex and there are so many exceptions to the rules. You can hardcode a certain number of common exceptions but it's not worth the trouble or bytes required. Plus even if you spend that much time on English, it's a similar investment to do the same for other languages if you need (although not all languages are as unneccessarily complex as English..).</p><p>Anyway the existing packages and methods are never perfect but work fairly well in practice, though each may have pros/cons depending on the situation.</p><pre>
 <code class="language-python">lemmed_text = [lemmatize_corenlp(nlp, t) for t in clean_text]</code>
-			</pre>
-
-			<pre>
+			</pre><pre>
 <code class="language-python"># For quick access in the future
 with open('kdn_lemmatized_text_corenlp.txt', 'w') as f:
     for t in lemmed_text:
         f.write("%s\n" % t)</code>
-			</pre>
-
-			<h3>Token Exploration</h3>
-			<p>
-				Once again I'm putting more on this webpage than I meant to, but I wanted to show a visualized "word count" for the most common tokens, similar to what we did 
-				with 'tags'. 
-			</p>
-			<pre>
+			</pre><h3>Token Exploration</h3><p>Once again I'm putting more on this webpage than I meant to, but I wanted to show a visualized "word count" for the most common tokens, similar to what we did with 'tags'.</p><pre>
 <code class="language-python"># Count most common words in post texts
 post_words = [word for text in clean_text for word in text.split()] 
 words_counts = Counter(post_words)</code>
-			</pre>
-			<pre>
+			</pre><pre>
 <code class="language-python">word_counts = sorted(words_counts.items(), key=lambda x: x[1], reverse=True)
 print(word_counts[:100])</code>
-			</pre>
-			<figure class="out-tall">
-				<img src="../imgs/print_word_counts.png" alt="most freq words"/>
-			</figure>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/print_word_counts.png" alt="most freq words"></figure><pre>
 <code class="language-python">words_df = pd.DataFrame(word_counts, columns=['Word', 'Count'])
 fig = plt.figure()
 fig.patch.set_facecolor('white')
@@ -622,28 +187,7 @@ _ = plt.ylabel('Count')
 _ = plt.xticks(rotation=45, fontsize=12)
 _ = plt.title('Top '+str(n_top)+' Most Common Words')
 plt.show()</code>
-			</pre>
-			<figure class="out-fitall">
-				<img src="../imgs/wordcounts_plot.png" alt="countplot of freq words"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					Ultimately we'll probably use something like BoW or ngrams-TFIDF for this dataset because those models are simpler 
-					and tend to work better when you have smaller datasets. 
-					For so few articles as this, a neural network like LSTM would probably be unnecessary. We'll save that tutorial for a tweets classification or 
-					something I might post later.
-				</p>
-			</div>
-			<h2 id="gensimPrep">Gensim Doc &amp; Token Prep</h2>
-			<p>
-				We'll finish this preparatory module with a first look at n-grams and Gensim's Phraser class. What comes below represents the lead-in to the next module 
-				where we'll actually employ n-grams in an LDA model, but the n-grams strategy we ultimately use for the model may be more fine-tuned than what we look at here today. 
-				In the next module we'll actually consider some extra dropout, etc.
-			</p>
-			<p>
-				But for now let's see how easy Gensim makes working with n-grams, the doc-term matrix, and corpora.
-			</p>
-			<pre>
+			</pre><figure class="out-fitall"><img src="../imgs/wordcounts_plot.png" alt="countplot of freq words"></figure><div class="text-block"><p>Ultimately we'll probably use something like BoW or ngrams-TFIDF for this dataset because those models are simpler and tend to work better when you have smaller datasets. For so few articles as this, a neural network like LSTM would probably be unnecessary. We'll save that tutorial for a tweets classification or something I might post later.</p></div><h2 id="gensimPrep">Gensim Doc &amp; Token Prep</h2><p>We'll finish this preparatory module with a first look at n-grams and Gensim's Phraser class. What comes below represents the lead-in to the next module where we'll actually employ n-grams in an LDA model, but the n-grams strategy we ultimately use for the model may be more fine-tuned than what we look at here today. In the next module we'll actually consider some extra dropout, etc.</p><p>But for now let's see how easy Gensim makes working with n-grams, the doc-term matrix, and corpora.</p><pre>
 <code class="language-python"># Create token: id dictionary from text file (lemmatized docs)
 import gensim
 from gensim import corpora, models
@@ -651,18 +195,10 @@ from gensim.utils import simple_preprocess
 
 f = 'kdn_lemmatized_text_corenlp.txt'
 dtm = [simple_preprocess(line, deacc=False) for line in open(f, encoding='utf-8')]</code>
-			</pre>
-
-
-			<pre>
+			</pre><pre>
 <code class="language-python"># first 10 terms in 1st document (aka article) 
 dtm[0][:10]</code>
-			</pre>
-			<figure class="out-tall">
-				<img src="../imgs/dtm0.png" alt="first 10 terms in dtm"/>
-			</figure>
-
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/dtm0.png" alt="first 10 terms in dtm"></figure><pre>
 <code class="language-python">import warnings
 warnings.filterwarnings('ignore')
 
@@ -677,18 +213,7 @@ trigram_mod = gensim.models.phrases.Phraser(trigram)
 
 # View 1,2,3-grams example
 print(trigram_mod[bigram_mod[dtm[0]]])</code>
-			</pre>
-			<figure class="out-tall">
-				<img src="../imgs/ngrams_dtm0.png" alt="first doc in dtm with ngrams"/>
-			</figure>
-			<div class="text-block">
-				<p>
-					Remember we're setting a min count and rather high threshold for the gensim Phrases, so not all possible 
-					instances will be merged into bi or trigrams. We don't want to use a much heavier model for the sake of terms 
-					that don't appear very often, particularly as this dataset will have a lot of infrequent names of people whom, to be blunt, we don't care about.
-				</p>
-			</div>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/ngrams_dtm0.png" alt="first doc in dtm with ngrams"></figure><div class="text-block"><p>Remember we're setting a min count and rather high threshold for the gensim Phrases, so not all possible instances will be merged into bi or trigrams. We don't want to use a much heavier model for the sake of terms that don't appear very often, particularly as this dataset will have a lot of infrequent names of people whom, to be blunt, we don't care about.</p></div><pre>
 <code class="language-python">def make_bigrams(texts):
     return [bigram_mod[doc] for doc in texts]
 
@@ -703,124 +228,7 @@ token_dict = corpora.Dictionary(dtm)
 
 # Corpus, for each doc a list of tuples (bag of words) like (tokenID, frequency_in_doc)
 corpus = [token_dict.doc2bow(d) for d in dtm]</code>
-			</pre>
-			<pre>
+			</pre><pre>
 <code class="language-python"># for instance:
 corpus[0][:10]</code>
-			</pre>
-			<figure class="out-tall">
-				<img src="../imgs/corpus0.png" alt="first 10 in corpus"/>
-			</figure>
-			<p>
-				So what we're calling 'corpus' here is just a bag of words for each doc (article text) we have. While I believe the preparation we finally do for our model will be slightly  
-				more involved than this, this is technically all we need in order to move on to the actual topic modeling stage of our project.
-			</p>
-			<p class="blog-disclaimer">
-				While I'll be throughly surprised if anyone somehow finds and reads this within a few days of my launching this website, if you're reading this I haven't yet posted the next 
-				module with topic modeling, but I'll link to it here and of course on the <i>NLP</i> page as soon as I finish annotating that notebook. Cheers.
-			</p>
-		</article>
-	</section>
-
-
-	<section class="container">
-		<div class="row">
-			<div class="row-content">
-				<p class="blog-disclaimer">
-					Full text and code for this module can be found 
-					<a class="bloginline-link" href="https://github.com/blsmxiu47/kdn-analysis" target="_blank">here</a> on my GitHub.
-				</p>
-			</div>
-		</div>
-	</section>
-	<section class="container links">
-		<div class="row">
-			<div class="row-content">
-				<ul>
-					<li>
-						<a role="navigation" class="btn pagetop-btn" href="#" data-toggle="tooltip" title="page top">
-							<i class="fas fa-arrow-up"></i> Page Top
-						</a>
-						
-					</li>
-					<li>
-						<a class="btn" href="../nlp.html" data-toggle="tooltip" title="Projects > NLP">
-							<i class="fas fa-arrow-circle-left"></i> NLP Home
-						</a>
-					</li>
-					<li>
-						<a class="btn btn-social-icon" href="https://github.com/blsmxiu47/kdn-analysis" data-toggle="tooltip" title="GitHub" target="_blank">
-							<i class="fab fa-github"></i> Full Code
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</section>
-
-	<footer>
-		<div class="container">
-			<div class="row row-footer-mobile mt-2">
-				<div class="col col-8 col-md-6">
-					<h4 class="footer-heading">Browse Projects</h4>
-					<ul class="nav-footer">
-						<li class="nav-item">
-							<a class="nav-link footer-nav-link" href="../data-and-design.html">Beyond the Code</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link footer-nav-link" href="../data-wrangling.html">State of the Art</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link footer-nav-link" href="../nlp.html">Projects Portfolio</a>
-					</ul>
-				</div>
-				<div class="col col-4 col-md-6 footer-nav-right">
-					<ul class="nav-footer">
-						<li class="nav-item">
-							<a class="nav-link footer-nav-link" href="../index.html">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link footer-nav-link" href="../about.html">About</a>
-						</li>
-					</ul>
-				</div>
-				<div class="col col-12 col-md-6">
-					<div class="row-footer-mobile">
-						<div class="col col-12 col-md-4">
-							<span>
-								<h4 class="footer-heading">Contact Me</h4>
-								<a class="footer-email" href="mailto:wes.warrin@hotmail.com">
-									wes.warrin@hotmail.com
-								</a>
-							</span>
-						</div>
-					</div>
-					<div class="row-footer-mobile footer-center">
-						<div class="col col-12">
-							<span>
-								<a class="btn btn-social-icon" href="https://www.linkedin.com/in/wes-warriner/" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a>
-								<a class="btn btn-social-icon" href="mailto:wes.warrin@hotmail.com" target="_blank"><i class="far fa-envelope fa-lg"></i></a>
-								<a class="btn btn-social-icon" href="https://github.com/blsmxiu47" target="_blank">
-									<i class="fab fa-github"></i>
-								</a>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="col col-12 col-md-6">
-					<div class="row-footer-mobile footer-center">
-						<div class="col col-12">
-							<span>&copy; 2020 Wes Warriner. <br>All rights reserved.</span>
-						</div>
-						<div class="col col-12 logo-wrapper mr-1 footer-center">
-							<a href="../index.html"><img src="../imgs/df-logo.png" alt="datafluent logo"><h4 class="mobile-hide-inline">Datafluent</h4></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-	<script src="../js/all.min.ca58b4b47933c865d886.js"></script>
-</body>
-</html>
+			</pre><figure class="out-tall"><img src="../imgs/corpus0.png" alt="first 10 in corpus"></figure><p>So what we're calling 'corpus' here is just a bag of words for each doc (article text) we have. While I believe the preparation we finally do for our model will be slightly more involved than this, this is technically all we need in order to move on to the actual topic modeling stage of our project.</p><p class="blog-disclaimer">While I'll be throughly surprised if anyone somehow finds and reads this within a few days of my launching this website, if you're reading this I haven't yet posted the next module with topic modeling, but I'll link to it here and of course on the <i>NLP</i> page as soon as I finish annotating that notebook. Cheers.</p></article></section><section class="container"><div class="row"><div class="row-content"><p class="blog-disclaimer">Full text and code for this module can be found <a class="bloginline-link" href="https://github.com/blsmxiu47/kdn-analysis" target="_blank">here</a> on my GitHub.</p></div></div></section><section class="container links"><div class="row"><div class="row-content"><ul><li><a role="navigation" class="btn pagetop-btn" href="#" data-toggle="tooltip" title="page top"><i class="fas fa-arrow-up"></i> Page Top</a></li><li><a class="btn" href="../nlp.html" data-toggle="tooltip" title="Projects > NLP"><i class="fas fa-arrow-circle-left"></i> NLP Home</a></li><li><a class="btn btn-social-icon" href="https://github.com/blsmxiu47/kdn-analysis" data-toggle="tooltip" title="GitHub" target="_blank"><i class="fab fa-github"></i> Full Code</a></li></ul></div></div></section><footer><div class="container"><div class="row row-footer-mobile mt-2"><div class="col col-8 col-md-6"><h4 class="footer-heading">Browse Projects</h4><ul class="nav-footer"><li class="nav-item"><a class="nav-link footer-nav-link" href="../data-and-design.html">Beyond the Code</a></li><li class="nav-item"><a class="nav-link footer-nav-link" href="../data-wrangling.html">State of the Art</a></li><li class="nav-item"><a class="nav-link footer-nav-link" href="../nlp.html">Projects Portfolio</a></li></ul></div><div class="col col-4 col-md-6 footer-nav-right"><ul class="nav-footer"><li class="nav-item"><a class="nav-link footer-nav-link" href="../index.html">Home</a></li><li class="nav-item"><a class="nav-link footer-nav-link" href="../about.html">About</a></li></ul></div><div class="col col-12 col-md-6"><div class="row-footer-mobile"><div class="col col-12 col-md-4"><span><h4 class="footer-heading">Contact Me</h4><a class="footer-email" href="mailto:wes.warrin@hotmail.com">wes.warrin@hotmail.com</a></span></div></div><div class="row-footer-mobile footer-center"><div class="col col-12"><span><a class="btn btn-social-icon" href="https://www.linkedin.com/in/wes-warriner/" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a> <a class="btn btn-social-icon" href="mailto:wes.warrin@hotmail.com" target="_blank"><i class="far fa-envelope fa-lg"></i></a> <a class="btn btn-social-icon" href="https://github.com/blsmxiu47" target="_blank"><i class="fab fa-github"></i></a></span></div></div></div><div class="col col-12 col-md-6"><div class="row-footer-mobile footer-center"><div class="col col-12"><span>&copy; 2020 Wes Warriner.<br>All rights reserved.</span></div><div class="col col-12 logo-wrapper mr-1 footer-center"><a href="../index.html"><img src="../imgs/df-logo.png" alt="datafluent logo"><h4 class="mobile-hide-inline">Datafluent</h4></a></div></div></div></div></div></footer><script src="../js/all.min.ca58b4b47933c865d886.js"></script></body></html>

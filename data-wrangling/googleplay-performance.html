@@ -1,167 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-	<!-- CSS -->
-	<link rel="stylesheet" href="../css/main.eb92775bd7dc8765c6a3.css">
-	<link rel="icon" type="image/png" href="../imgs/df-logo.png">
-	<title>Datafluent - EDA with GooglePlay</title>
-</head>
-<body>
-	<header>
-		<nav class="navbar navbar-expand-lg">
-			<div class="logo-wrapper mr-1"><a href="../index.html"><img src="../imgs/df-logo.png"
-						alt="datafluent logo"></a></div><button class="navbar-toggler" type="button"
-				data-toggle="collapse" data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-					<li id="nav-projects-span" class="nav-item"><span>Projects</span></li>
-					<li class="nav-item nav-indent"><a class="nav-link" href="../data-and-design.html">Beyond the Code</a></li>
-					<li class="nav-item nav-indent"><a class="nav-link" href="../data-wrangling.html">Data
-							Wrangling</a></li>
-					<li class="nav-item nav-indent"><a class="nav-link" href="../nlp.html">NLP</a></li>
-					<li class="nav-item"><a class="nav-link" href="../about.html">About</a></li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-	<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-			<li class="breadcrumb-item"><a href="../data-wrangling.html">Data Wrangling</a></li>
-			<li class="breadcrumb-item active" aria-current="page">EDA with GooglePlay</li>
-		</ol>
-	</nav>
-	<nav role="navigation" class="project-navbar" id="projectNavbar"><button class="navbar-toggler" type="button"
-			data-toggle="collapse" data-target="#googleplay-navbar" aria-controls="googleplay-navbar"
-			aria-expanded="false" aria-label="Toggle project navigation"><span><i
-					class="fas fa-caret-down"></i></span></button>
-		<div class="collapse navbar-collapse" id="googleplay-navbar">
-			<ul class="navbar-nav">
-				<li class="projnav-item"><a class="projnav-link" href="#theData">The Data</a></li>
-				<li class="projnav-item"><a class="projnav-link" href="#intuition">EDA Step 1 - Intuition</a></li>
-				<li class="projnav-item"><a class="projnav-link" href="#univariateInspection">EDA Part 2 - Univariate
-						Inspection</a></li>
-				<li class="projnav-item"><a class="projnav-link" href="#correlations">EDA Part 3 - Intervariate
-						Relationships</a></li>
-				<li class="projnav-item"><a class="projnav-link" href="#featurePrep">Feature Preparation</a></li>
-			</ul>
-		</div>
-	</nav>
-	<section class="container article-top">
-		<div class="main-heading">
-			<h1>EDA with GooglePlay</h1>
-		</div><img class="img-block" style="width: 200px;" src="../imgs/google-play-logo.png"
-			alt="GooglePlay icon">
-	</section>
-	<section class="container">
-		<div class="row">
-			<div class="row-content">
-				<p>Think of this as an intro to a few broad topics:</p>
-				<ol class="list-lg">
-					<li>Python (pandas, numpy, matplotlib/seaborn) for exploratory analytics, data tidying and feature
-						engineering</li>
-					<li>The analytical mindset, and the importance of getting the hands dirty and prepping models based
-						on intuition, in addition to statistics</li>
-					<li>Predictive modeling (with scikit-learn) as a multi-step <i>process</i> rather than just the
-						final step</li>
-				</ol>
-				<p></p>
-				<p class="mb-2x">In fact this page will be the first of two modules for this GooglePlay data, focusing
-					here on the EDA, feature engineering and other preparation for modeling, while the second shall
-					handle the iterative process of modeling itself.</p>
-				<p>We'll be using a fairly straightforward dataset I <a class="bloginline-link"
-						href="https://www.kaggle.com/lava18/google-play-store-apps" target="_blank">found on Kaggle</a>
-					to demonstrate these concepts. I'm just using a prepared dataset in order to conveniently gloss over
-					some of the messy steps involved in analytics such as data collection and cleaning of truly raw
-					data. For more in-depth on data collection and tidying, maybe check out <a class="bloginline-link"
-						href="../nlp/text-cleaning.html" target="_blank">KDN Text Cleaning</a>.</p>
-				<!-- <p>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous"><!-- CSS --><link rel="stylesheet" href="../css/main.eb92775bd7dc8765c6a3.css"><link rel="icon" type="image/png" href="../imgs/df-logo.png"><title>Datafluent - EDA with GooglePlay</title></head><body><header><nav class="navbar navbar-expand-lg"><div class="logo-wrapper mr-1"><a href="../index.html"><img src="../imgs/df-logo.png" alt="datafluent logo"></a></div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li><li id="nav-projects-span" class="nav-item"><span>Projects</span></li><li class="nav-item nav-indent"><a class="nav-link" href="../data-and-design.html">Beyond the Code</a></li><li class="nav-item nav-indent"><a class="nav-link" href="../data-wrangling.html">Data Wrangling</a></li><li class="nav-item nav-indent"><a class="nav-link" href="../nlp.html">NLP</a></li><li class="nav-item"><a class="nav-link" href="../about.html">About</a></li></ul></div></nav></header><nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">Home</a></li><li class="breadcrumb-item"><a href="../data-wrangling.html">Data Wrangling</a></li><li class="breadcrumb-item active" aria-current="page">EDA with GooglePlay</li></ol></nav><nav role="navigation" class="project-navbar" id="projectNavbar"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#googleplay-navbar" aria-controls="googleplay-navbar" aria-expanded="false" aria-label="Toggle project navigation"><span><i class="fas fa-caret-down"></i></span></button><div class="collapse navbar-collapse" id="googleplay-navbar"><ul class="navbar-nav"><li class="projnav-item"><a class="projnav-link" href="#theData">The Data</a></li><li class="projnav-item"><a class="projnav-link" href="#intuition">EDA Step 1 - Intuition</a></li><li class="projnav-item"><a class="projnav-link" href="#univariateInspection">EDA Part 2 - Univariate Inspection</a></li><li class="projnav-item"><a class="projnav-link" href="#correlations">EDA Part 3 - Intervariate Relationships</a></li><li class="projnav-item"><a class="projnav-link" href="#featurePrep">Feature Preparation</a></li></ul></div></nav><section class="container article-top"><div class="main-heading"><h1>EDA with GooglePlay</h1></div><img class="img-block" style="width: 200px;" src="../imgs/google-play-logo.png" alt="GooglePlay icon"></section><section class="container"><div class="row"><div class="row-content"><p>Think of this as an intro to a few broad topics:</p><ol class="list-lg"><li>Python (pandas, numpy, matplotlib/seaborn) for exploratory analytics, data tidying and feature engineering</li><li>The analytical mindset, and the importance of getting the hands dirty and prepping models based on intuition, in addition to statistics</li><li>Predictive modeling (with scikit-learn) as a multi-step <i>process</i> rather than just the final step</li></ol><p></p><p class="mb-2x">In fact this page will be the first of two modules for this GooglePlay data, focusing here on the EDA, feature engineering and other preparation for modeling, while the second shall handle the iterative process of modeling itself.</p><p>We'll be using a fairly straightforward dataset I <a class="bloginline-link" href="https://www.kaggle.com/lava18/google-play-store-apps" target="_blank">found on Kaggle</a> to demonstrate these concepts. I'm just using a prepared dataset in order to conveniently gloss over some of the messy steps involved in analytics such as data collection and cleaning of truly raw data. For more in-depth on data collection and tidying, maybe check out <a class="bloginline-link" href="../nlp/text-cleaning.html" target="_blank">KDN Text Cleaning</a>.</p><!-- <p>
 					We will also hit some basic modeling concepts below and in the <a class="bloginline-link" href="#">subsequent module (coming soon)</a>, but more for the sake of demonstrating the process than with the intention of discussing ML techniques.
 					If you're interested in machine learning topics try <a class="bloginline-link" href="#" target="_blank">some nlp proj?</a>.
-				</p> -->
-				<p class="blog-disclaimer">Please note that these pages act as decorative <i>summaries</i> for some of
-					my portfolio work. If the summaries here pique your interest then check out the full notebooks and
-					code to be found on <a class="bloginline-link" href="https://github.com/blsmxiu47"
-						target="_blank">my GitHub</a>. There may be quite a bit more code, but most of my notebooks are
-					well-annotated with my thoughts and explanations.</p>
-			</div>
-		</div>
-	</section>
-	<section class="project-content container">
-		<article>
-			<h2 id="theData">The Data</h2>
-			<pre>
+				</p> --><p class="blog-disclaimer">Please note that these pages act as decorative <i>summaries</i> for some of my portfolio work. If the summaries here pique your interest then check out the full notebooks and code to be found on <a class="bloginline-link" href="https://github.com/blsmxiu47" target="_blank">my GitHub</a>. There may be quite a bit more code, but most of my notebooks are well-annotated with my thoughts and explanations.</p></div></div></section><section class="project-content container"><article><h2 id="theData">The Data</h2><pre>
 <code class="language-python">import numpy as np
 import pandas as pd</code>
-			</pre>
-			<pre>
+			</pre><pre>
 <code class="language-python">df_raw = pd.read_csv('googleplaystore.csv')
 df_raw.head()</code>
-			</pre>
-			<figure class="out-df"><img src="../imgs/df_raw_head.png" alt="df_raw.head()"></figure>
-			<div class="text-block mb-2x">
-				<p>To sum it up, this is App data scraped from GooglePlay store including Price, Content Genre, Size,
-					number of installations, etc. One thing you could do with this dataset is develop a model to predict
-					installs or app rating based on this data, which we'll do later on, but first I want to just take a
-					minute here to assess the power of pure intuition and what can be done with just a tiny bit of EDA.
-				</p>
-			</div>
-			<h2 id="intuition">EDA Step 1 - Intuition</h2>
-			<p>First of all, just by looking at column headers we can make a few guesses as to where we might start
-				looking for intervariate relationships, correlations to any variables we might want to predict for,
-				potential confounding factors, etc.</p>
-			<p>For example, we know from experience that we, and users in general, are more likely to try installing a
-				free app - ceteris paribus - over a paid app. However at the same time we understand that while not
-				always the case, there is often an increase in quality (or content quantity, e.g. lite vs. full
-				versions) when we go from free to paid apps.</p>
-			<p>These may seem like obvious statements, but if you think about it for a moment our <i>intuition</i> as
-				human beings with a lifetime of experiences is really quite powerful. Without employing any software or
-				code we have at least one clear starting point from which to begin our data exploration and analysis. In
-				this and other projects I'll surely come back to this simple point, but we immediately see the
-				difference between a human analyst with intuition and a hypothetical analyst who only knows how to run
-				code and build models. Things like common sense, past experience, and intuition will give us a huge jump
-				on any analytical task if we take some time to think rather than jumping immediately into the code.</p>
-			<pre>
+			</pre><figure class="out-df"><img src="../imgs/df_raw_head.png" alt="df_raw.head()"></figure><div class="text-block mb-2x"><p>To sum it up, this is App data scraped from GooglePlay store including Price, Content Genre, Size, number of installations, etc. One thing you could do with this dataset is develop a model to predict installs or app rating based on this data, which we'll do later on, but first I want to just take a minute here to assess the power of pure intuition and what can be done with just a tiny bit of EDA.</p></div><h2 id="intuition">EDA Step 1 - Intuition</h2><p>First of all, just by looking at column headers we can make a few guesses as to where we might start looking for intervariate relationships, correlations to any variables we might want to predict for, potential confounding factors, etc.</p><p>For example, we know from experience that we, and users in general, are more likely to try installing a free app - ceteris paribus - over a paid app. However at the same time we understand that while not always the case, there is often an increase in quality (or content quantity, e.g. lite vs. full versions) when we go from free to paid apps.</p><p>These may seem like obvious statements, but if you think about it for a moment our <i>intuition</i> as human beings with a lifetime of experiences is really quite powerful. Without employing any software or code we have at least one clear starting point from which to begin our data exploration and analysis. In this and other projects I'll surely come back to this simple point, but we immediately see the difference between a human analyst with intuition and a hypothetical analyst who only knows how to run code and build models. Things like common sense, past experience, and intuition will give us a huge jump on any analytical task if we take some time to think rather than jumping immediately into the code.</p><pre>
 <code class="language-python">df_raw.info()</code>
-				</pre>
-			<figure class="out-tall"><img src="../imgs/dfraw_info.png" alt="df_raw.info()"></figure>
-			<p>Getting back to this particular dataset, here are a few examples of observations we can make before
-				needing to dig any deeper:</p>
-			<div class="text-block">
-				<p></p>
-				<ul class="bloglist">
-					<li>Category, Type, Content Rating will definitely be our categorical variables. Genres we'll
-						eventually need to look at one-hotting everything as well. It's basically a bunch of T/Fs where
-						each app can have one or more genres</li>
-					<li>Last Updted we'll change to a Date type. may or may not be useful. Probably apps that have NOT
-						been update in a long time won't be a popular, whereas apps that have been updated any time in
-						the fairly recent past will probably not vary too much based purely on the difference in date
-						(i.e. 1 week ago and 2 weeks ago may not prove to be all that different on average, whereas over
-						a year ago would be a red flag). don't know if it'll be necessary but it might be an option to
-						group these last updateed dates into categories representing how (in)active the devs are.</li>
-					<li>Reviews: more reviews tends to mean more popular, widely used apps. Also let's be honest you're
-						more likely to download an app with 12000 testimonials than a similar looking one with 12 (or
-						none).</li>
-					<li>Size: I think this might be mixed. Smaller generally would be better all else equal but larger
-						apps can potentially do more and have higher quality. Plus larger sizes just might be necessarry
-						for certain categories. I think we'll see sizes grouped by app category in the data, so size
-						alone might not be all that telling and may end up being a proxy for things like category and
-						price</li>
-				</ul>
-				<p></p>
-			</div>
-			<p>Again, for my full annotations please check out the original notebook on github.</p>
-			<h2 id="univariateInspection">EDA Step 2 - Univariate Inspections</h2>
-			<!-- <p class="blog-subheading">
-			</p> -->
-			<pre class="subheading-block">
+				</pre><figure class="out-tall"><img src="../imgs/dfraw_info.png" alt="df_raw.info()"></figure><p>Getting back to this particular dataset, here are a few examples of observations we can make before needing to dig any deeper:</p><div class="text-block"><p></p><ul class="bloglist"><li>Category, Type, Content Rating will definitely be our categorical variables. Genres we'll eventually need to look at one-hotting everything as well. It's basically a bunch of T/Fs where each app can have one or more genres</li><li>Last Updted we'll change to a Date type. may or may not be useful. Probably apps that have NOT been update in a long time won't be a popular, whereas apps that have been updated any time in the fairly recent past will probably not vary too much based purely on the difference in date (i.e. 1 week ago and 2 weeks ago may not prove to be all that different on average, whereas over a year ago would be a red flag). don't know if it'll be necessary but it might be an option to group these last updateed dates into categories representing how (in)active the devs are.</li><li>Reviews: more reviews tends to mean more popular, widely used apps. Also let's be honest you're more likely to download an app with 12000 testimonials than a similar looking one with 12 (or none).</li><li>Size: I think this might be mixed. Smaller generally would be better all else equal but larger apps can potentially do more and have higher quality. Plus larger sizes just might be necessarry for certain categories. I think we'll see sizes grouped by app category in the data, so size alone might not be all that telling and may end up being a proxy for things like category and price</li></ul><p></p></div><p>Again, for my full annotations please check out the original notebook on github.</p><h2 id="univariateInspection">EDA Step 2 - Univariate Inspections</h2><!-- <p class="blog-subheading">
+			</p> --><pre class="subheading-block">
 <code class="language-python"># Useful Python3:
 
 DATAFRAME.head(), .tail()
@@ -181,90 +30,27 @@ plt.hist()
 plt.boxplot()
 sns.catplot()
 sns.countplot()</code>
-			</pre>
-			<p>Once we've spent some time imagining where we might be headed and jot down any preliminary notes, we can
-				start looking at a few things for each variable we have, namely:</p>
-			<ul class="bloglist">
-				<li>Data types; what they are, whether they make sense, maybe they've just been coerced in data
-					preparation, for instance</li>
-				<li>Categorical vs. Numeric variables</li>
-				<li>Unique values &amp; value counts (for categoricals)</li>
-				<li>Numeric variable distributions</li>
-			</ul>
-			<p></p>
-			<p>You could jump right into something like a correlation matrix, but so long as the data isn't superbly
-				sparse or anonymized I like to get a feel for each variable individually and assess any oddities that
-				may have been introduced in data collection and preparation (taken as exogenous processes for this
-				project).</p>
-			<p>For example,</p>
-			<pre>
+			</pre><p>Once we've spent some time imagining where we might be headed and jot down any preliminary notes, we can start looking at a few things for each variable we have, namely:</p><ul class="bloglist"><li>Data types; what they are, whether they make sense, maybe they've just been coerced in data preparation, for instance</li><li>Categorical vs. Numeric variables</li><li>Unique values &amp; value counts (for categoricals)</li><li>Numeric variable distributions</li></ul><p></p><p>You could jump right into something like a correlation matrix, but so long as the data isn't superbly sparse or anonymized I like to get a feel for each variable individually and assess any oddities that may have been introduced in data collection and preparation (taken as exogenous processes for this project).</p><p>For example,</p><pre>
 <code class="language-python">categoricals = ['Category', 'Type', 'Content Rating', 'Installs']
 for c in categoricals:
 	print(pd.unique(df_raw[c]))</code>
-			</pre>
-			<figure class="out-wide"><img src="../imgs/categoricals_0.png" alt="unique categoricals"></figure>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/categoricals_0.png" alt="unique categoricals"></figure><pre>
 <code class="language-python">df_raw.Category.value_counts()</code>
-			</pre>
-			<figure class="out-tall"><img src="../imgs/dfraw_category_valcounts.png"
-					alt="category value_counts"></figure>
-			<p>So as long as we have visible data (as opposed to hashed data, for instance), one approach is to separate
-				variables into numeric and categorical, and then review/clean them up one by one, though obviously
-				checking back in on the data as a whole when investigating discrepencies or mistakes in the data.</p>
-			<h3>Univariate Inspection Example - App Category</h3>
-			<p>For instance in the GooglePlay data when checking out App "Category', we come across one row where
-				category is suddenly just '1.9'. In this case we need to take a step back and look at the surrounding
-				data in order to understand <b>why</b> we have this value.</p>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/dfraw_category_valcounts.png" alt="category value_counts"></figure><p>So as long as we have visible data (as opposed to hashed data, for instance), one approach is to separate variables into numeric and categorical, and then review/clean them up one by one, though obviously checking back in on the data as a whole when investigating discrepencies or mistakes in the data.</p><h3>Univariate Inspection Example - App Category</h3><p>For instance in the GooglePlay data when checking out App "Category', we come across one row where category is suddenly just '1.9'. In this case we need to take a step back and look at the surrounding data in order to understand <b>why</b> we have this value.</p><pre>
 <code class="language-python">df.loc[df['Category'] == '1.9']</code>
-			</pre>
-			<figure class="out-wide"><img src="../imgs/cat_19_0.png" alt="category == 1.9">
-			</figure>
-			<div class="text-block mb-2x">
-				<p>Looking this app up on the Google Play Store, the category is in fact 'LIFESTYLE'. And then we can
-					see that every other value after Category is shifted one to the left for some reason, probably just
-					a mistake coming from the original data.</p>
-			</div>
-			<p>But regardless, this is another situation where being a logical human analyst (and being thorough) comes
-				in handy, seeing as we can just look at the other values in the same row and shift it all, rather than
-				throwing up our hands and dropping instances of Category=='1.9' without digging deeper. Not so
-				significant when it's just one row, but taking a step back and making small, common sense decisions
-				proves to be important in the long run when you have messier data than this.</p>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/cat_19_0.png" alt="category == 1.9"></figure><div class="text-block mb-2x"><p>Looking this app up on the Google Play Store, the category is in fact 'LIFESTYLE'. And then we can see that every other value after Category is shifted one to the left for some reason, probably just a mistake coming from the original data.</p></div><p>But regardless, this is another situation where being a logical human analyst (and being thorough) comes in handy, seeing as we can just look at the other values in the same row and shift it all, rather than throwing up our hands and dropping instances of Category=='1.9' without digging deeper. Not so significant when it's just one row, but taking a step back and making small, common sense decisions proves to be important in the long run when you have messier data than this.</p><pre>
 <code class="language-python">df.iloc[10472] = ['Life Made WI-Fi Touchscreen Photo Frame', 'LIFESTYLE', 1.9, 19, '3.0M', '1000+', 'Free', 0,  'Everyone', 'NA', 'February 11, 2018', '1.0.19', '4.0 and up']
 df.iloc[10472]</code>
-			</pre>
-			<figure class="out-tall"><img src="../imgs/cat_19_1.png" alt="new row"></figure>
-			<p>In addition to general data cleaning and weeding out inconsistencies, EDA step 2 is where I like to do my
-				first visualizations, usually to get an idea of univariate distributions, outliers, etc.</p>
-			<h3>Univariate Inspection Example - Price</h3>
-			<p>This "Univariate Inspection" is a process I go through with each known variable (though of course we
-				won't change target variables if we're going to be predicting later). However it can get quite long
-				depending on what we're working with, so for now I'll just include a possible inspection process for a
-				single variable, our 'Price' variable, below.</p>
-			<div class="text-block">
-				<p>Retrieve number of instances of each unique price value:</p>
-			</div>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/cat_19_1.png" alt="new row"></figure><p>In addition to general data cleaning and weeding out inconsistencies, EDA step 2 is where I like to do my first visualizations, usually to get an idea of univariate distributions, outliers, etc.</p><h3>Univariate Inspection Example - Price</h3><p>This "Univariate Inspection" is a process I go through with each known variable (though of course we won't change target variables if we're going to be predicting later). However it can get quite long depending on what we're working with, so for now I'll just include a possible inspection process for a single variable, our 'Price' variable, below.</p><div class="text-block"><p>Retrieve number of instances of each unique price value:</p></div><pre>
 <code class="language-python">df.Price.value_counts()</code>
-			</pre>
-			<figure class="out-tall"><img src="../imgs/price_valcounts.png" alt="price valueCounts"></figure>
-			<div class="text-block">
-				<p>First let's remove the dollar signs and convert all values to floats (from strings)</p>
-			</div>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/price_valcounts.png" alt="price valueCounts"></figure><div class="text-block"><p>First let's remove the dollar signs and convert all values to floats (from strings)</p></div><pre>
 <code class="language-python">def clean_usd(s):
 	if isinstance(s, str):
     	s = s.replace('$', '')
 	return float(s)
 
 df['Price'] = df.Price.apply(lambda x: clean_usd(x))</code>
-			</pre>
-			<div class="text-block">
-				<p>Inspect mean, standard deviation, IQR, find outlier candidates in Price variable (the numeric_summary
-					function I use several times throughout the notebook).</p>
-			</div>
-			<pre>
+			</pre><div class="text-block"><p>Inspect mean, standard deviation, IQR, find outlier candidates in Price variable (the numeric_summary function I use several times throughout the notebook).</p></div><pre>
 <code class="language-python">def numeric_summary(series):
 	print('mean: ', np.mean(series))
 	print('StdDev: ', np.std(series))
@@ -275,39 +61,19 @@ df['Price'] = df.Price.apply(lambda x: clean_usd(x))</code>
 	print('max: ', max(series))
 
 numeric_summary(df.loc[df.Price != 0].Price)</code>
-			</pre>
-			<figure class=""><img class="blogpost-img" src="../imgs/price_num_sum.png"
-					alt="numeric summary output"></figure>
-			<pre>
+			</pre><figure class=""><img class="blogpost-img" src="../imgs/price_num_sum.png" alt="numeric summary output"></figure><pre>
 <code class="language-python">df.loc[(df.Price &gt; 12) & (df.Install_bins == 0)]</code>
-			</pre>
-			<figure class="out-wide"><img class="blogpost-img" src="../imgs/price_loc_tbl.png" alt="dataframe slice">
-			</figure>
-			<pre>
+			</pre><figure class="out-wide"><img class="blogpost-img" src="../imgs/price_loc_tbl.png" alt="dataframe slice"></figure><pre>
 <code class="language-python">plt.hist(df.loc[(df.Price &lt; 20) & (df.Price &gt; 0)].Price, bins=80)
 plt.xticks(np.arange(0, 20, step=.5))
 plt.title('Histogram of 0 &lt; Price &lt; 20', size=20)
 plt.show()</code>
-			</pre>
-			<figure class="out-wide"><img src="../imgs/pricehist_bins80.png" alt="histogram right skew">
-			</figure>
-			<div class="text-block">
-				<p>Note peaks at prices .99, 1.99, 2.99, 3.99, 4.99, etc. (Especially at .99, 2.99, 4.99, 9.99, 14.99,
-					19.99) and to a lesser extent the ~.49's as well. 0.49 itself is nonexistent.</p>
-			</div>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/pricehist_bins80.png" alt="histogram right skew"></figure><div class="text-block"><p>Note peaks at prices .99, 1.99, 2.99, 3.99, 4.99, etc. (Especially at .99, 2.99, 4.99, 9.99, 14.99, 19.99) and to a lesser extent the ~.49's as well. 0.49 itself is nonexistent.</p></div><pre>
 <code class="language-python">plt.hist(df.loc[(df.Price &lt; 50) & (df.Price &gt; 0)].Price, bins=40)
 plt.xticks(np.arange(0, 50, step=1))
 plt.title('Histogram of 0 &lt; Price &lt; 50', size=20)
 plt.show()</code>
-			</pre>
-			<figure class="out-wide"><img src="../imgs/pricehist_bins40.png" alt="histogram right skew">
-			</figure>
-			<div class="text-block">
-				<p>There are legit mini-clusters of apps at 19.99, 24.99 and 29.99, so we'll try putting them in the
-					last bound group I think.</p>
-			</div>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/pricehist_bins40.png" alt="histogram right skew"></figure><div class="text-block"><p>There are legit mini-clusters of apps at 19.99, 24.99 and 29.99, so we'll try putting them in the last bound group I think.</p></div><pre>
 <code class="language-python"># Similar to what we did with Installs, except Price is actually continuous
 df.loc[df['Price'] == 0, 'Price_Group'] = '0.00'
 df.loc[(df['Price'] &gt; 0) & (df['Price'] &lt;= 0.99), 'Price_Group'] = '0.01-0.99'
@@ -317,19 +83,7 @@ df.loc[(df['Price'] &gt; 4.99) & (df['Price'] &lt;= 9.99), 'Price_Group']   = '5
 df.loc[(df['Price'] &gt; 9.99) & (df['Price'] &lt;= 14.99), 'Price_Group']   = '10-14.99'
 df.loc[(df['Price'] &gt; 14.99) & (df['Price'] &lt;= 29.99), 'Price_Group']   = '15-29.99'
 df.loc[(df['Price'] &gt; 29.99), 'Price_Group']  = '30+'</code>
-			</pre>
-			<p>So obviously we do the above and more for each of our variables where there is cleaning or feature
-				engineering to be done. For 'Price' we've noted the significant peaks, the tendency toward prices ending
-				in .99 and .49, the major right skew no matter how far you zoom out, and the few outliers that we have
-				in the hundreds of dollars. We've also created a new categorical feature that classifies app price into
-				bins, labeled 'Price_Group', that may serve as a helpful feature when we work on creating a model. We
-				have the liberty to modify this feature later on of course, as modeling is an iterative process and we
-				may, for instance, change the price group definitions during the modeling phase as we test different
-				features and combinations. Basically, it's a process that we gradually build on as we learn more about
-				our data and is always subject to change.</p>
-			<h2 id="correlations">EDA Part 3 - Intervariate Relationships &amp; Correlations</h2>
-			<p class="blog-subheading">
-				<pre class="subheading-block">
+			</pre><p>So obviously we do the above and more for each of our variables where there is cleaning or feature engineering to be done. For 'Price' we've noted the significant peaks, the tendency toward prices ending in .99 and .49, the major right skew no matter how far you zoom out, and the few outliers that we have in the hundreds of dollars. We've also created a new categorical feature that classifies app price into bins, labeled 'Price_Group', that may serve as a helpful feature when we work on creating a model. We have the liberty to modify this feature later on of course, as modeling is an iterative process and we may, for instance, change the price group definitions during the modeling phase as we test different features and combinations. Basically, it's a process that we gradually build on as we learn more about our data and is always subject to change.</p><h2 id="correlations">EDA Part 3 - Intervariate Relationships &amp; Correlations</h2><p class="blog-subheading"><pre class="subheading-block">
 <code class="language-python"># Useful Python3:
 
 DATAFRAME.corr()
@@ -339,16 +93,7 @@ seaborn.heatmap(), .pairplot(), .catplot()
 seaborn.regplot(), .jointplot(), .distplot()
 
 </code>
-				</pre>
-			</p>
-			<p>This is the time where we finally get to do a lot of visualization back-to-back. We'll first get a
-				glimpse of our correlation matrix, and then dive in further to scrutinize relationships between
-				variables, and in particular the relationships between the target variable and others.</p>
-			<p>I will note that more of what I look at when investigating datasets is just statistical values; basically
-				tables and numbers with adequate visualizations when I feel like zooming out and looking at something
-				with a wider lense. But for the sake of visual appeal, I'll emphasize the visualizations a little more
-				in these articles, where I can.</p>
-			<pre>
+				</pre></p><p>This is the time where we finally get to do a lot of visualization back-to-back. We'll first get a glimpse of our correlation matrix, and then dive in further to scrutinize relationships between variables, and in particular the relationships between the target variable and others.</p><p>I will note that more of what I look at when investigating datasets is just statistical values; basically tables and numbers with adequate visualizations when I feel like zooming out and looking at something with a wider lense. But for the sake of visual appeal, I'll emphasize the visualizations a little more in these articles, where I can.</p><pre>
 <code class="language-python">sns.set(style="white")
 # numerics = ['Rating', 'Reviews', 'Price', 'Size_bytes', 'Install_bins', 'Major_Ver', 'Min_Android_Major_Ver', 'Days_Since_Update']
 
@@ -367,290 +112,56 @@ cmap = sns.diverging_palette(220, 10, as_cmap=True)
 # Draw the heatmap with the mask and correct aspect ratio
 sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5})</code>
-			</pre>
-			<figure class="out-fitall"><img src="../imgs/corr_heatmap.png" alt="correlation matrix"></figure>
-			<pre>
+			</pre><figure class="out-fitall"><img src="../imgs/corr_heatmap.png" alt="correlation matrix"></figure><pre>
 <code class="language-python">corr</code>
-			</pre>
-			<figure class="out-wide"><img src="../imgs/corr_table.png" alt="correlations table">
-			</figure>
-			<div class="text-block mb-2x">
-				<p>A few points to note:</p>
-				<ul class="bloglist">
-					<li>Notice Reviews and Install_bins are highly correlated. This makes sense as the more people
-						installing and using the app the more reviews it'll naturally get, positive and negative.</li>
-					<li>Reviews and Size also positively correlated. This makes sense since Size and Installs are
-						positively correlated as well. This is not to say that larger apps are always better, but it
-						stands to reason that popular apps used by a lot of people are popular because they can do more,
-						and doing more I think we can agree would have a positive relationship with size (although I bet
-						there's diminishing returns after a point).</li>
-					<li>Keeping an eye on Major Version variable. It shows little correlation with anything, I think
-						because we had almost everything with a Major_Ver of 1, and many of the higher values seemed
-						arbitrary. I think we'll collapse some of the higher versions into one 9+ (or something) group
-						after all.</li>
-					<li>The Minimum Android Version has positive correlation with Size. So larger apps are more likely
-						to have a higher minimun Android ver., i.e. they aren't supported by old versions, which makes
-						sense. More recent, large and comp-heavy apps are more likely to only be compatible with recent
-						Android software.</li>
-					<li>Size & Reviews are positively correlated with Rating, Price and Days_Since_Update are negatively
-						correlated (with Rating and everything). So in general price may in fact be a deterrent, and
-						apps that aren't updated recently will probably also prove to be less popular</li>
-				</ul>
-			</div>
-			<h3>Variable Relationships with Target ('Rating')</h3>
-			<p>Depending on just how many variables I have to work with, I may go ahead and look at distributions w.r.t.
-				target (and other interesting variables) for every single one. That's not always practical or necessary,
-				but it's simple to do with this skinny dataset.</p>
-			<p>An example of possible visualizations for one categorical and one numeric variable, with target..</p>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/corr_table.png" alt="correlations table"></figure><div class="text-block mb-2x"><p>A few points to note:</p><ul class="bloglist"><li>Notice Reviews and Install_bins are highly correlated. This makes sense as the more people installing and using the app the more reviews it'll naturally get, positive and negative.</li><li>Reviews and Size also positively correlated. This makes sense since Size and Installs are positively correlated as well. This is not to say that larger apps are always better, but it stands to reason that popular apps used by a lot of people are popular because they can do more, and doing more I think we can agree would have a positive relationship with size (although I bet there's diminishing returns after a point).</li><li>Keeping an eye on Major Version variable. It shows little correlation with anything, I think because we had almost everything with a Major_Ver of 1, and many of the higher values seemed arbitrary. I think we'll collapse some of the higher versions into one 9+ (or something) group after all.</li><li>The Minimum Android Version has positive correlation with Size. So larger apps are more likely to have a higher minimun Android ver., i.e. they aren't supported by old versions, which makes sense. More recent, large and comp-heavy apps are more likely to only be compatible with recent Android software.</li><li>Size & Reviews are positively correlated with Rating, Price and Days_Since_Update are negatively correlated (with Rating and everything). So in general price may in fact be a deterrent, and apps that aren't updated recently will probably also prove to be less popular</li></ul></div><h3>Variable Relationships with Target ('Rating')</h3><p>Depending on just how many variables I have to work with, I may go ahead and look at distributions w.r.t. target (and other interesting variables) for every single one. That's not always practical or necessary, but it's simple to do with this skinny dataset.</p><p>An example of possible visualizations for one categorical and one numeric variable, with target..</p><pre>
 <code class="language-python">g = sns.catplot(x='Install_Group',y='Rating',data=df, kind="box", height=10, palette='Blues')
 g.despine(left=True)
 g.set_xticklabels(rotation=90)
 g = g.set_ylabels('Rating')
 plt.title('Boxplot of Rating vs Install_Group',size = 20)	
 </code>
-			</pre>
-			<figure class="out-fitall"><img src="../imgs/boxplot_rating_installgrp.png"
-					alt="boxplot right skew"></figure>
-			<pre>
+			</pre><figure class="out-fitall"><img src="../imgs/boxplot_rating_installgrp.png" alt="boxplot right skew"></figure><pre>
 <code class="language-python">plt.figure(figsize = (10,10))
 g = sns.jointplot(x='Reviews', y="Rating", color='skyblue', data=df[df.Reviews &lt; 1000000], height=8)
 </code>
-			</pre>
-			<figure class="out-fitall"><img src="../imgs/jointplot_rating_reviews.png"
-					alt="jointplot right skews"></figure>
-			<h2 id="featurePrep">Feature Preparation</h2>
-			<p>I'll only go into this a little bit here, since the focus is supposed to be on the above EDA for this
-				module, and I'll go into the modeling phase, etc. in its own article, but this is where we can do a few
-				things, if we haven't already done them inadvertantly as part of the univariate inspections step:</p>
-			<ul class="bloglist">
-				<li>Add mean encodings</li>
-				<li>Add advanced features (more feature engineering)</li>
-				<li>Any remaining imputation (drop with nulls, values we can't handle with our model)</li>
-				<li>One-hot and Label encodings</li>
-				<li>Variable scaling and/or normalization</li>
-			</ul>
-			<p>Below will be a few examples of preparation that could be used for a model predicting 'Rating' for Google
-				Play apps based on this dataset. Again, this is just the start of a process to <i>discover</i> a good
-				model. It's an iterative, trial-and-error process with no single "correct" solution. Often it's a
-				balancing act between simplicity, adaptability, and accuracy.</p>
-			<p>In this case we start by reassessing the null values we have, and determine how to impute them (or
-				whether to) remove some rows entirely.</p>
-			<h3>Missing Values</h3>
-			<p>For instance in preparing for the model to predict 'Rating', for this explicit purpose any rows with
-				Rating missing won't be useful for us, so we can just remove them.</p>
-			<p>On the other hand we definitely do not want to remove all rows where app Size is missing (these were
-				originally 'Varies with Device' instances in the raw data), as other information from these rows could
-				be quite valuable in predicting Rating. So we'll come up with a strategy to impute by some other values,
-				as exemplified below..</p>
-			<div class="text-block">
-				<p>We'll need to decide how to deal with missing values and NaNs in each column.</p>
-				<p>To start, let's drop rows with the target var Rating missing</p>
-			</div>
-			<pre>
+			</pre><figure class="out-fitall"><img src="../imgs/jointplot_rating_reviews.png" alt="jointplot right skews"></figure><h2 id="featurePrep">Feature Preparation</h2><p>I'll only go into this a little bit here, since the focus is supposed to be on the above EDA for this module, and I'll go into the modeling phase, etc. in its own article, but this is where we can do a few things, if we haven't already done them inadvertantly as part of the univariate inspections step:</p><ul class="bloglist"><li>Add mean encodings</li><li>Add advanced features (more feature engineering)</li><li>Any remaining imputation (drop with nulls, values we can't handle with our model)</li><li>One-hot and Label encodings</li><li>Variable scaling and/or normalization</li></ul><p>Below will be a few examples of preparation that could be used for a model predicting 'Rating' for Google Play apps based on this dataset. Again, this is just the start of a process to <i>discover</i> a good model. It's an iterative, trial-and-error process with no single "correct" solution. Often it's a balancing act between simplicity, adaptability, and accuracy.</p><p>In this case we start by reassessing the null values we have, and determine how to impute them (or whether to) remove some rows entirely.</p><h3>Missing Values</h3><p>For instance in preparing for the model to predict 'Rating', for this explicit purpose any rows with Rating missing won't be useful for us, so we can just remove them.</p><p>On the other hand we definitely do not want to remove all rows where app Size is missing (these were originally 'Varies with Device' instances in the raw data), as other information from these rows could be quite valuable in predicting Rating. So we'll come up with a strategy to impute by some other values, as exemplified below..</p><div class="text-block"><p>We'll need to decide how to deal with missing values and NaNs in each column.</p><p>To start, let's drop rows with the target var Rating missing</p></div><pre>
 <code class="language-python"># df_trimmed.isnull().sum()
 df_trimmed = df_trimmed[df_trimmed['Rating'].notna()]
 </code>
-			</pre>
-			<div class="text-block">
-				<p>The remaining missings come from where version and size were marked as 'Varies with Device'. We don't
-					want to drop all these rows since other features could still be useful. Instead I think it makes
-					sense to impute values and maybe add a boolean column indicating that this app has variable
-					version/size.</p>
-				<p>We've seen that Major Ver was mostly 1 and Min Android ver was overwhelmingly 4, so I'm going to
-					impute by the mode for each of these for now.</p>
-			</div>
-			<pre>
+			</pre><div class="text-block"><p>The remaining missings come from where version and size were marked as 'Varies with Device'. We don't want to drop all these rows since other features could still be useful. Instead I think it makes sense to impute values and maybe add a boolean column indicating that this app has variable version/size.</p><p>We've seen that Major Ver was mostly 1 and Min Android ver was overwhelmingly 4, so I'm going to impute by the mode for each of these for now.</p></div><pre>
 <code class="language-python">df_trimmed['Major_Ver'].fillna(value=1.0, inplace=True)
 df_trimmed['Min_Android_Major_Ver'].fillna(value=4.0, inplace=True)</code>
-			</pre>
-			<div class="text-block">
-				<p>As for Size_bytes, I think we'll impute by a mean/median grouped by other variable(s) like Android
-					version, just to be a little more precise than imputing by the overall mean, which might be
-					excessively large for many apps.</p>
-			</div>
-			<pre>
+			</pre><div class="text-block"><p>As for Size_bytes, I think we'll impute by a mean/median grouped by other variable(s) like Android version, just to be a little more precise than imputing by the overall mean, which might be excessively large for many apps.</p></div><pre>
 <code class="language-python">df_trimmed.groupby('Min_Android_Major_Ver')['Size_bytes'].mean()</code>
-			</pre>
-			<figure class="out-tall"><img src="../imgs/min_and_mjr_vr_sizeBytes_mean.png" alt="grouped means"></figure>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/min_and_mjr_vr_sizeBytes_mean.png" alt="grouped means"></figure><pre>
 <code class="language-python">df_trimmed.groupby('Install_Group')['Size_bytes'].mean()</code>
-			</pre>
-			<figure class="out-tall"><img src="../imgs/installgrp_sizeBytes_mean.png" alt="grouped means"></figure>
-			<div class="text-block">
-				<p>We see a bit more variation with Install_Group (apps with more installs tend to be on average larger
-					than apps with fewer installs).</p>
-			</div>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/installgrp_sizeBytes_mean.png" alt="grouped means"></figure><div class="text-block"><p>We see a bit more variation with Install_Group (apps with more installs tend to be on average larger than apps with fewer installs).</p></div><pre>
 <code class="language-python">print('Difference: Overall InstallGroup proportions - NaN Size_bytes InstallGroup proportions:', \
 	 df_trimmed['Install_Group'].value_counts() / len(df_trimmed) - \
 	 df_trimmed[df_trimmed['Size_bytes'].isna()]['Install_Group'].value_counts() / len(df_trimmed[df_trimmed['Size_bytes'].isna()]))</code>
-			</pre>
-			<figure class="out-wide"><img src="../imgs/VerInstalls_meanDiffs.png"
-					alt="proportion differences"></figure>
-			<div class="text-block">
-				<p>What we can see from the above is that larger install groups make up a larger proportion of all data
-					when Size is missing than they do when Size exists. (negative differences as we go to larger groups,
-					though actually the last group is not the most negative so it's not a perfect decline).</p>
-				<p>But anyway I think it's worth trying to impute Size with mean grouped by install group, seeing as
-					there is a clear difference between means across groups and the variables are correlated.</p>
-			</div>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/VerInstalls_meanDiffs.png" alt="proportion differences"></figure><div class="text-block"><p>What we can see from the above is that larger install groups make up a larger proportion of all data when Size is missing than they do when Size exists. (negative differences as we go to larger groups, though actually the last group is not the most negative so it's not a perfect decline).</p><p>But anyway I think it's worth trying to impute Size with mean grouped by install group, seeing as there is a clear difference between means across groups and the variables are correlated.</p></div><pre>
 <code class="language-python">df_trimmed['Size_bytes'] = df_trimmed.groupby('Install_Group')['Size_bytes'].transform(lambda x: x.fillna(x.mean())
 df_trimmed.isnull().sum().sum()</code>
-			</pre>
-			<figure style="height: 10vh;"><img src="../imgs/zero.png" alt="0"></figure>
-			<h3>Encodings</h3>
-			<p>Now that we've dealt with missing values, etc., the next steps involve preprocessing our data so that it
-				can actually be used in a model. For instance while tree-based algorithms may be able to handle
-				categorical variables alright, for models from linear regression to neural nets we'll need to first
-				encode the categoricals in some way, generally via one-hot or label encodings.</p>
-			<p>So for the last part of this module, we'll go ahead and look at performing basic categoricals encoding
-				with sklearn.</p>
-			<pre>
+			</pre><figure style="height: 10vh;"><img src="../imgs/zero.png" alt="0"></figure><h3>Encodings</h3><p>Now that we've dealt with missing values, etc., the next steps involve preprocessing our data so that it can actually be used in a model. For instance while tree-based algorithms may be able to handle categorical variables alright, for models from linear regression to neural nets we'll need to first encode the categoricals in some way, generally via one-hot or label encodings.</p><p>So for the last part of this module, we'll go ahead and look at performing basic categoricals encoding with sklearn.</p><pre>
 <code class="language-python">categoricals = df_trimmed.select_dtypes(include=['object', 'category'])
 categoricals.head()</code>
-			</pre>
-			<figure class="out-wide"><img src="../imgs/categoricals_head.png"
-					alt="Categoricals df head"></figure>
-			<pre>
+			</pre><figure class="out-wide"><img src="../imgs/categoricals_head.png" alt="Categoricals df head"></figure><pre>
 <code class="language-python">to_labels = df_trimmed[['Price_Group', 'Install_Group', 'Major_Ver', 'Min_Android_Major_Ver']]
 to_onehot = df_trimmed[['Category', 'Content Rating']]</code>
-			</pre>
-			<div class="text-block">
-				<p>We have 2 kinds of categorical variables today:</p>
-				<ol>
-					<li>Ordered categoricals that we can label encode</li>
-					<ul class="bloglist">
-						<li>Price_Group</li>
-						<li>Install_Group</li>
-						<li>Major_Ver</li>
-						<li>Min_Android_Major_Ver</li>
-					</ul>
-					<li>Categoricals with no meaningful order that we'd like to one-hot encode</li>
-					<ul class="bloglist">
-						<li>Category</li>
-						<li>Content_Rating</li>
-					</ul>
-					<p></p>
-				</ol>
-			</div>
-			<pre>
+			</pre><div class="text-block"><p>We have 2 kinds of categorical variables today:</p><ol><li>Ordered categoricals that we can label encode</li><ul class="bloglist"><li>Price_Group</li><li>Install_Group</li><li>Major_Ver</li><li>Min_Android_Major_Ver</li></ul><li>Categoricals with no meaningful order that we'd like to one-hot encode</li><ul class="bloglist"><li>Category</li><li>Content_Rating</li></ul><p></p></ol></div><pre>
 <code class="language-python"># One-hot Encodings
 df_encoded = pd.get_dummies(to_onehot)
 df_encoded.info()</code>
-			</pre>
-			<figure class="out-tall"><img src="../imgs/df_encoded_info.png" alt="Encoded df info"></figure>
-			<pre>
+			</pre><figure class="out-tall"><img src="../imgs/df_encoded_info.png" alt="Encoded df info"></figure><pre>
 <code class="language-python"># Label Encodings
 from sklearn.preprocessing import LabelEncoder
 to_labels = to_labels.apply(LabelEncoder().fit_transform)
 to_labels.head()</code>
-			</pre>
-			<figure class=""><img src="../imgs/to_labels_head.png" alt="to_labels df head"></figure>
-			<pre>
+			</pre><figure class=""><img src="../imgs/to_labels_head.png" alt="to_labels df head"></figure><pre>
 <code class="language-python">df_trimmed.drop(['Category', 'Content Rating', 'Price_Group',\
 	'Install_Group', 'Major_Ver', 'Min_Android_Major_Ver'], axis=1, inplace=True)
 df_encoded = pd.concat([df_trimmed, df_encoded, to_labels], axis=1, sort=False)</code>
-			</pre>
-			<pre>
+			</pre><pre>
 <code class="language-python">df_encoded.head()</code>
-			</pre>
-			<figure class="out-wide" style="height: 45vh;"><img src="../imgs/df_encoded_head.png" alt="encoded df head">
-			</figure>
-			<div class="text-block mb-2x">
-				<p>So you can see that all of our features now numeric. Either they were numeric to begin with or else
-					we flattened categorical variables to a set of T/F features representable by 0 or 1.</p>
-			</div>
-			<p>The next steps, assuming we are happy with our features for now, are to scale numeric features and most
-				likely normalize or standardize everything in order to start regression. However this post has gotten
-				quite long, and also the approach to processes such as normalization are subject to change during the
-				modeling phase (i.e. we may try out several strategies). I want to exemplify this iterative process of
-				modeling, tweaking, rinse and repeat, so I'm going to give it its own article. It's not my top priority
-				right now but hopefully I'll get it up soon.</p>
-			<p>This has been the EDA, feature engineering, and encodings portion of our GooglePlay data investigation.
-				The whole runthrough with this dataset including encodings and soon modeling with sklearn can be found
-				on my github, with annotations.</p>
-		</article>
-	</section>
-	<section class="container">
-		<div class="row">
-			<div class="row-content">
-				<p class="blog-disclaimer">Full text and code for this module can be found <a class="bloginline-link"
-						href="https://github.com/blsmxiu47/googleplay-performance" target="_blank">here</a> on my GitHub.</p>
-			</div>
-		</div>
-	</section>
-	<section class="container links">
-		<div class="row">
-			<div class="row-content">
-				<ul>
-					<li><a role="navigation" class="btn pagetop-btn" href="#" data-toggle="tooltip" title="page top"><i
-								class="fas fa-arrow-up"></i> Page Top</a></li>
-					<li><a class="btn" href="../data-wrangling.html" data-toggle="tooltip"
-							title="Projects > Data Wrangling"><i class="fas fa-arrow-circle-left"></i> Wrangling Home</a>
-					</li>
-					<li><a class="btn btn-social-icon" href="https://github.com/blsmxiu47/googleplay-performance"
-							data-toggle="tooltip" title="GitHub repo" target="_blank"><i class="fab fa-github"></i> Full
-							Code</a></li>
-				</ul>
-			</div>
-		</div>
-	</section>
-	<footer>
-		<div class="container">
-			<div class="row row-footer-mobile mt-2">
-				<div class="col col-8 col-md-6">
-					<h4 class="footer-heading">Browse Projects</h4>
-					<ul class="nav-footer">
-						<li class="nav-item"><a class="nav-link footer-nav-link" href="../data-and-design.html">Beyond the Code</a></li>
-						<li class="nav-item"><a class="nav-link footer-nav-link" href="../data-wrangling.html">Data
-								Wrangling</a></li>
-						<li class="nav-item"><a class="nav-link footer-nav-link" href="../nlp.html">NLP</a></li>
-					</ul>
-				</div>
-				<div class="col col-4 col-md-6 footer-nav-right">
-					<ul class="nav-footer">
-						<li class="nav-item"><a class="nav-link footer-nav-link" href="../index.html">Home</a></li>
-						<li class="nav-item"><a class="nav-link footer-nav-link" href="../about.html">About</a>
-						</li>
-					</ul>
-				</div>
-				<div class="col col-12 col-md-6">
-					<div class="row-footer-mobile">
-						<div class="col col-12 col-md-4"><span>
-								<h4 class="footer-heading">Contact Me</h4><a class="footer-email"
-									href="mailto:wes.warrin@hotmail.com">wes.warrin@hotmail.com</a>
-							</span></div>
-					</div>
-					<div class="row-footer-mobile footer-center">
-						<div class="col col-12">
-							<span>
-								<a class="btn btn-social-icon"
-									href="https://www.linkedin.com/in/wes-warriner/" target="_blank"><i
-										class="fab fa-linkedin fa-lg"></i></a>
-								<a class="btn btn-social-icon" href="mailto:wes.warrin@hotmail.com" target="_blank"><i
-										class="far fa-envelope fa-lg"></i></a>
-								<a class="btn btn-social-icon" href="https://github.com/blsmxiu47"
-									target="_blank">
-									<i class="fab fa-github"></i>
-								</a>
-							</span>
-								</div>
-					</div>
-				</div>
-				<div class="col col-12 col-md-6">
-					<div class="row-footer-mobile footer-center">
-						<div class="col col-12"><span>&copy; 2020 Wes Warriner. <br>All rights reserved.</span></div>
-						<div class="col col-12 logo-wrapper mr-1 footer-center"><a href="../index.html"><img
-									src="../imgs/df-logo.png" alt="datafluent logo">
-								<h4 class="mobile-hide-inline">Datafluent</h4>
-							</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<script src="../js/all.min.ca58b4b47933c865d886.js"></script>
-</body>
-</html>
+			</pre><figure class="out-wide" style="height: 45vh;"><img src="../imgs/df_encoded_head.png" alt="encoded df head"></figure><div class="text-block mb-2x"><p>So you can see that all of our features now numeric. Either they were numeric to begin with or else we flattened categorical variables to a set of T/F features representable by 0 or 1.</p></div><p>The next steps, assuming we are happy with our features for now, are to scale numeric features and most likely normalize or standardize everything in order to start regression. However this post has gotten quite long, and also the approach to processes such as normalization are subject to change during the modeling phase (i.e. we may try out several strategies). I want to exemplify this iterative process of modeling, tweaking, rinse and repeat, so I'm going to give it its own article. It's not my top priority right now but hopefully I'll get it up soon.</p><p>This has been the EDA, feature engineering, and encodings portion of our GooglePlay data investigation. The whole runthrough with this dataset including encodings and soon modeling with sklearn can be found on my github, with annotations.</p></article></section><section class="container"><div class="row"><div class="row-content"><p class="blog-disclaimer">Full text and code for this module can be found <a class="bloginline-link" href="https://github.com/blsmxiu47/googleplay-performance" target="_blank">here</a> on my GitHub.</p></div></div></section><section class="container links"><div class="row"><div class="row-content"><ul><li><a role="navigation" class="btn pagetop-btn" href="#" data-toggle="tooltip" title="page top"><i class="fas fa-arrow-up"></i> Page Top</a></li><li><a class="btn" href="../data-wrangling.html" data-toggle="tooltip" title="Projects > Data Wrangling"><i class="fas fa-arrow-circle-left"></i> Wrangling Home</a></li><li><a class="btn btn-social-icon" href="https://github.com/blsmxiu47/googleplay-performance" data-toggle="tooltip" title="GitHub repo" target="_blank"><i class="fab fa-github"></i> Full Code</a></li></ul></div></div></section><footer><div class="container"><div class="row row-footer-mobile mt-2"><div class="col col-8 col-md-6"><h4 class="footer-heading">Browse Projects</h4><ul class="nav-footer"><li class="nav-item"><a class="nav-link footer-nav-link" href="../data-and-design.html">Beyond the Code</a></li><li class="nav-item"><a class="nav-link footer-nav-link" href="../data-wrangling.html">Data Wrangling</a></li><li class="nav-item"><a class="nav-link footer-nav-link" href="../nlp.html">NLP</a></li></ul></div><div class="col col-4 col-md-6 footer-nav-right"><ul class="nav-footer"><li class="nav-item"><a class="nav-link footer-nav-link" href="../index.html">Home</a></li><li class="nav-item"><a class="nav-link footer-nav-link" href="../about.html">About</a></li></ul></div><div class="col col-12 col-md-6"><div class="row-footer-mobile"><div class="col col-12 col-md-4"><span><h4 class="footer-heading">Contact Me</h4><a class="footer-email" href="mailto:wes.warrin@hotmail.com">wes.warrin@hotmail.com</a></span></div></div><div class="row-footer-mobile footer-center"><div class="col col-12"><span><a class="btn btn-social-icon" href="https://www.linkedin.com/in/wes-warriner/" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a> <a class="btn btn-social-icon" href="mailto:wes.warrin@hotmail.com" target="_blank"><i class="far fa-envelope fa-lg"></i></a> <a class="btn btn-social-icon" href="https://github.com/blsmxiu47" target="_blank"><i class="fab fa-github"></i></a></span></div></div></div><div class="col col-12 col-md-6"><div class="row-footer-mobile footer-center"><div class="col col-12"><span>&copy; 2020 Wes Warriner.<br>All rights reserved.</span></div><div class="col col-12 logo-wrapper mr-1 footer-center"><a href="../index.html"><img src="../imgs/df-logo.png" alt="datafluent logo"><h4 class="mobile-hide-inline">Datafluent</h4></a></div></div></div></div></div></footer><script src="../js/all.min.ca58b4b47933c865d886.js"></script></body></html>
